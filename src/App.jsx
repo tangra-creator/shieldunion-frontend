@@ -1,42 +1,38 @@
-import { submitCaseToBackend } from './api/submitCase';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import SubmitCase from './pages/SubmitCase';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 
 function App() {
-  const [backendMessage, setBackendMessage] = useState('');
-function handleSubmit() {
-  const testCase = {
-    name: "Test Member",
-    tier: 1,
-    description: "Testing API connection from frontend",
-  };
-
-  submitCaseToBackend(testCase).then(result => {
-    if (result.success) {
-      alert("✅ Case submitted successfully!");
-    } else {
-      alert("❌ Error: " + result.error);
-    }
-  });
-}
-
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/`)
-      .then(response => response.text())
-      .then(text => setBackendMessage(text))
-      .catch(error => {
-        console.error('Error fetching backend:', error);
-        setBackendMessage('Failed to connect to backend.');
-      });
-  }, []);
-
   return (
-  <div>
-    <h1>Shieldunion Frontend</h1>
-    <p>Backend says: {backendMessage}</p>
-    <button onClick={handleSubmit}>Submit Test Case</button>
-  </div>
-);
+    <Router>
+      <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
+        <h1>🛡️ Shieldunion Platform</h1>
+        <p>✅ The backend is live and your protection is active.</p>
 
+        <nav style={{ margin: '1rem 0' }}>
+          <Link to="/submit" style={navLink}>Submit Case</Link>
+          <Link to="/register" style={navLink}>Register</Link>
+          <Link to="/dashboard" style={navLink}>Dashboard</Link>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<p>Welcome to the Shieldunion. Choose an action above.</p>} />
+          <Route path="/submit" element={<SubmitCase />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
+
+const navLink = {
+  marginRight: '1rem',
+  textDecoration: 'none',
+  color: '#0066cc',
+  fontWeight: 'bold'
+};
 
 export default App;
