@@ -20,7 +20,7 @@ function handleSubmit() {
 }
 
   useEffect(() => {
-    fetch('http://localhost:5000/')  // Calls backend API
+    fetch(`${import.meta.env.VITE_API_URL}/`)
       .then(response => response.text())
       .then(text => setBackendMessage(text))
       .catch(error => {
