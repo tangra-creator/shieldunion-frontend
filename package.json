@@ -5,6 +5,9 @@
     "build": "npm run build --prefix frontend && cp -r frontend/dist ./dist"
   },
   "dependencies": {
-    "serve": "^14.2.0"
+    "serve": "^14.2.4"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
   }
 }

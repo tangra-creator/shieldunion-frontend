@@ -1,6 +1,7 @@
 export async function submitCaseToBackend(caseData) {
   try {
-    const response = await fetch('http://localhost:5000/submit-case', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/submit-case`, {
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
