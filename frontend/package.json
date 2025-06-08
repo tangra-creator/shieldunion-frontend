@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Shieldunion frontend application",
   "scripts": {
-    "build": "vite build --mode production"
+    "build": "npx vite build --mode production"
   },
   "dependencies": {
     "i18next": "^25.2.1",
-    "i18next-browser-languagedetector": "^6.1.5",
+    "i18next-browser-languageDetector": "^6.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^15.5.2",
