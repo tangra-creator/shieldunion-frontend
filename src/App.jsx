@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
 import Register from "./pages/Register";
 import SubmitCase from "./pages/SubmitCase";
 import Dashboard from "./pages/Dashboard";
