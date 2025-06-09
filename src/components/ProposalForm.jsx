@@ -1,70 +1,75 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const ProposalForm = () => {
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    country: "",
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    country: '',
   });
 
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://your-backend-url/api/proposal", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) {
-        alert("Proposal submitted!");
-        setForm({ title: "", description: "", country: "" });
-      } else {
-        alert("Failed to submit.");
-      }
+      await axios.post('https://shieldunion-backend.onrender.com/api/proposals', formData);
+      setSubmitted(true);
+      setError('');
+      alert("Proposal submitted successfully!");
     } catch (err) {
       console.error(err);
+      setError('Error submitting proposal');
       alert("Error submitting.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto p-4 bg-white rounded shadow">
-      <h2 className="text-xl font-bold">Propose ShieldUnion Legal Recognition</h2>
-      <input
-        type="text"
-        name="title"
-        placeholder="Proposal Title"
-        value={form.title}
-        onChange={handleChange}
-        className="w-full border p-2"
-        required
-      />
-      <textarea
-        name="description"
-        placeholder="Describe your proposal"
-        value={form.description}
-        onChange={handleChange}
-        className="w-full border p-2"
-        rows="5"
-        required
-      />
-      <input
-        type="text"
-        name="country"
-        placeholder="Country"
-        value={form.country}
-        onChange={handleChange}
-        className="w-full border p-2"
-        required
-      />
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-        Submit Proposal
-      </button>
-    </form>
+    <div style={{ padding: '20px' }}>
+      <h2>📜 Propose ShieldUnion Legal Recognition</h2>
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: '10px' }}>
+          <label>Proposal Title:</label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Proposal Title"
+            value={formData.title}
+            onChange={handleChange}
+            style={{ width: '100%' }}
+          />
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <label>Description:</label>
+          <textarea
+            name="description"
+            placeholder="Describe your proposal"
+            value={formData.description}
+            onChange={handleChange}
+            style={{ width: '100%' }}
+          />
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <label>Country:</label>
+          <input
+            type="text"
+            name="country"
+            placeholder="Country"
+            value={formData.country}
+            onChange={handleChange}
+            style={{ width: '100%' }}
+          />
+        </div>
+        <button type="submit">Submit Proposal</button>
+      </form>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {submitted && <p style={{ color: 'green' }}>Proposal submitted!</p>}
+    </div>
   );
 };
 
