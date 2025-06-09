@@ -1,3 +1,4 @@
+import ProposalForm from "./components/ProposalForm";
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -12,26 +13,30 @@ import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <Router>
-      <div style={{ padding: '2rem' }}>
-        <h1>🛡️ Welcome to ShieldUnion!</h1>
-        <p>The backend is live and your protection is active.</p>
+    <>
+      <ProposalForm />
 
-        <nav style={{ margin: '1rem 0' }}>
-          <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
-          <Link to="/register" style={{ marginRight: '1rem' }}>Register</Link>
-          <Link to="/submit" style={{ marginRight: '1rem' }}>Submit Case</Link>
-          <Link to="/dashboard">Dashboard</Link>
-        </nav>
+      <Router>
+        <div style={{ padding: "2rem" }}>
+          <h1>🛡️ Welcome to ShieldUnion!</h1>
+          <p>The backend is live and your protection is active.</p>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/submit" element={<SubmitCase />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </div>
-    </Router>
+          <nav style={{ margin: "1rem 0" }}>
+            <Link to="/" style={{ marginRight: "1rem" }}>Home</Link>
+            <Link to="/register" style={{ marginRight: "1rem" }}>Register</Link>
+            <Link to="/submit" style={{ marginRight: "1rem" }}>Submit Case</Link>
+            <Link to="/dashboard">Dashboard</Link>
+          </nav>
+
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/submit" element={<SubmitCase />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
 }
 
