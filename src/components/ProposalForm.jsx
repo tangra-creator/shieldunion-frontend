@@ -47,29 +47,36 @@ const ProposalForm = () => {
         <div style={{ marginBottom: '10px' }}>
           <label>Description:</label>
           <textarea
-            name="description"
-            placeholder="Describe your proposal"
-            value={formData.description}
-            onChange={handleChange}
-            style={{ width: '100%' }}
-          />
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <label>Country:</label>
-          <input
-            type="text"
-            name="country"
-            placeholder="Country"
-            value={formData.country}
-            onChange={handleChange}
-            style={{ width: '100%' }}
-          />
-        </div>
-        <button type="submit">Submit Proposal</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {submitted && <p style={{ color: 'green' }}>Proposal submitted!</p>}
-    </div>
+  name="description"
+  placeholder="Describe your proposal"
+  value={formData.description}
+  onChange={handleChange}
+  style={{ width: '100%', padding: '10px', resize: 'vertical' }}  // ← Add padding here
+/>
+
+        <div className="form-group">
+  <label>Description:</label>
+  <textarea
+    name="description"
+    placeholder="Describe your proposal"
+    value={formData.description}
+    onChange={handleChange}
+    className="form-textarea"
+  />
+</div>
+
+<div className="form-group">
+  <label>Country:</label>
+  <input
+    type="text"
+    name="country"
+    placeholder="Country"
+    value={formData.country}
+    onChange={handleChange}
+    className="form-input"
+  />
+</div>
+
   );
 };
 
