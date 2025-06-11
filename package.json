@@ -5,9 +5,11 @@
     "build": "npm run build --prefix frontend && cp -r frontend/dist ./dist"
   },
   "dependencies": {
+    "react-router-dom": "^7.6.2",
     "serve": "^14.2.4"
   },
   "devDependencies": {
+    "nodemon": "^3.1.10",
     "vite": "^6.3.5"
   }
 }

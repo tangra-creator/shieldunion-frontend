@@ -1,42 +1,45 @@
-import { submitCaseToBackend } from './api/submitCase';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
+import Register from './Register';
+import SubmitCase from './SubmitCase';
+import Dashboard from './Dashboard';
+import ProposalForm from './components/ProposalForm';
+import DAOVoting from './components/DAOVoting';
 
 function App() {
-  const [backendMessage, setBackendMessage] = useState('');
-function handleSubmit() {
-  const testCase = {
-    name: "Test Member",
-    tier: 1,
-    description: "Testing API connection from frontend",
-  };
-
-  submitCaseToBackend(testCase).then(result => {
-    if (result.success) {
-      alert("✅ Case submitted successfully!");
-    } else {
-      alert("❌ Error: " + result.error);
-    }
-  });
-}
-
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/`)
-      .then(response => response.text())
-      .then(text => setBackendMessage(text))
-      .catch(error => {
-        console.error('Error fetching backend:', error);
-        setBackendMessage('Failed to connect to backend.');
-      });
-  }, []);
-
   return (
-  <div>
-    <h1>Shieldunion Frontend</h1>
-    <p>Backend says: {backendMessage}</p>
-    <button onClick={handleSubmit}>Submit Test Case</button>
-  </div>
-);
+    <Router>
+      <div style={{ padding: '20px' }}>
+        <h1>🛡️ Welcome to ShieldUnion!</h1>
+        <p>The backend is live and your protection is active.</p>
+        <nav style={{ marginBottom: '20px' }}>
+          <Link to="/">Home</Link> |{' '}
+          <Link to="/register">Register</Link> |{' '}
+          <Link to="/submit">Submit Case</Link> |{' '}
+          <Link to="/dashboard">Dashboard</Link> |{' '}
+          <Link to="/proposal">Proposal</Link>
+        </nav>
 
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div>
+                <h3>ShieldUnion Frontend</h3>
+                <p>Shieldunion backend server is running.</p>
+              </div>
+            }
+          />
+          <Route path="/register" element={<Register />} />
+          <Route path="/submit" element={<SubmitCase />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/proposal" element={<ProposalForm />} />
+          <Route path="/vote" element={<DAOVoting />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
