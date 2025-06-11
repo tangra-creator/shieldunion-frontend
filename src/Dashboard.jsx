@@ -7,7 +7,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchProposals = async () => {
       try {
-        const res = await axios.get('https://shieldunion-backend.onrender.com/api/proposals');
+       const response = await fetch("https://shieldunion-backend.onrender.com/api/proposals");
         setProposals(res.data);
       } catch (err) {
         console.error('Failed to fetch proposals:', err);
