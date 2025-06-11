@@ -8,6 +8,7 @@ const Dashboard = () => {
   const fetchProposals = async () => {
     try {
       const response = await fetch("https://shieldunion-backend.onrender.com/api/proposals");
+
       const data = await response.json();
       setProposals(data);
     } catch (error) {
