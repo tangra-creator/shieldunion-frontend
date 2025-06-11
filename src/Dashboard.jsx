@@ -5,17 +5,19 @@ const Dashboard = () => {
   const [proposals, setProposals] = useState([]);
 
   useEffect(() => {
-    const fetchProposals = async () => {
-      try {
-       const response = await fetch("https://shieldunion-backend.onrender.com/api/proposals");
-        setProposals(res.data);
-      } catch (err) {
-        console.error('Failed to fetch proposals:', err);
-      }
-    };
+  const fetchProposals = async () => {
+    try {
+      const response = await fetch("https://shieldunion-backend.onrender.com/api/proposals");
+      const data = await response.json();
+      setProposals(data);
+    } catch (error) {
+      console.error("Error fetching proposals:", error);
+    }
+  };
 
-    fetchProposals();
-  }, []);
+  fetchProposals();
+}, []);
+
 
   return (
     <div style={{ padding: '20px' }}>
