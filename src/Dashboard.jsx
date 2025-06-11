@@ -18,8 +18,8 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div>
-      <h2>DAO Dashboard</h2>
+    <div style={{ padding: "20px" }}>
+      <h2>📊 DAO Dashboard</h2>
       {proposals.length === 0 ? (
         <p>No proposals found yet.</p>
       ) : (
