@@ -16,11 +16,12 @@ const SubmitCase = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/case", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(caseData),
-      });
+      const response = await fetch("https://shieldunion-backend.onrender.com/api/case", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(caseData),
+});
+
 
       if (response.ok) {
         setMessage("Case submitted successfully.");
