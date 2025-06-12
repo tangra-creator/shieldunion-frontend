@@ -2,19 +2,16 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+    <div className="p-6">
       <img
         src="/shield-logo.svg"
         alt="ShieldUnion Logo"
         style={{ width: '60px', marginBottom: '1rem' }}
       />
+      <h1 className="text-3xl font-bold mb-4">Welcome to ShieldUnion!</h1>
+      <p className="mb-2">The backend is live and your protection is active.</p>
 
-      <h1 className="text-2xl font-bold">Welcome to ShieldUnion!</h1>
-      <p className="text-gray-700 mb-4">
-        The backend is live and your protection is active.
-      </p>
-
-      <div className="space-y-2">
+      <div className="space-y-1 mb-6">
         <Link to="/register" className="text-blue-600 underline block">Register</Link>
         <Link to="/submit" className="text-blue-600 underline block">Submit Case</Link>
         <Link to="/dashboard" className="text-blue-600 underline block">Dashboard</Link>
