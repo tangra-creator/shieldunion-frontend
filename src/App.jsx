@@ -1,43 +1,36 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-
-import Register from './Register';
-import SubmitCase from './SubmitCase';
-import Dashboard from './Dashboard';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Register from './pages/Register';
+import SubmitCase from './pages/SubmitCase';
+import Dashboard from './pages/Dashboard';
 import ProposalForm from './components/ProposalForm';
-import DAOVoting from './components/DAOVoting';
+import Vault from './pages/Vault';
+import CivGuardApply from './pages/CivGuardApply';
+import AdminPanel from './pages/AdminPanel';
+import DAOControl from './pages/DAOControl';
+import InfoTrade from './pages/InfoTrade';
+import MemberProfile from './pages/MemberProfile';
+import MyCases from './pages/MyCases';
+import MyProtection from './pages/MyProtection';
 
 function App() {
   return (
     <Router>
-      <div style={{ padding: '20px' }}>
-        <h1>🛡️ Welcome to ShieldUnion!</h1>
-        <p>The backend is live and your protection is active.</p>
-        <nav style={{ marginBottom: '20px' }}>
-          <Link to="/">Home</Link> |{' '}
-          <Link to="/register">Register</Link> |{' '}
-          <Link to="/submit">Submit Case</Link> |{' '}
-          <Link to="/dashboard">Dashboard</Link> |{' '}
-          <Link to="/proposal">Proposal</Link>
-        </nav>
-
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div>
-                <h3>ShieldUnion Frontend</h3>
-                <p>Shieldunion backend server is running.</p>
-              </div>
-            }
-          />
-          <Route path="/register" element={<Register />} />
-          <Route path="/submit" element={<SubmitCase />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/proposal" element={<ProposalForm />} />
-          <Route path="/vote" element={<DAOVoting />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/submit" element={<SubmitCase />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/proposal" element={<ProposalForm />} />
+        <Route path="/vault" element={<Vault />} />
+        <Route path="/civguard" element={<CivGuardApply />} />
+        <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/daocontrol" element={<DAOControl />} />
+        <Route path="/infotrade" element={<InfoTrade />} />
+        <Route path="/memberprofile" element={<MemberProfile />} />
+        <Route path="/mycases" element={<MyCases />} />
+        <Route path="/myprotection" element={<MyProtection />} />
+      </Routes>
     </Router>
   );
 }
