@@ -5,18 +5,14 @@ function Dashboard() {
   const [registrations, setRegistrations] = useState([]);
 
   useEffect(() => {
-    axios.get("https://shieldunion-backend.onrender.com/api/registrations")
-      .then((res) => {
-        setRegistrations(res.data);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch registrations:", err);
-      });
+    axios.get("https://shieldunion-backend.onrender.com/registrations")
+      .then((res) => setRegistrations(res.data))
+      .catch((err) => console.error("Error fetching data:", err));
   }, []);
 
   return (
     <div>
-      <h1 className="text-xl font-bold mb-4">Registered Members</h1>
+      <h2>Registered Members</h2>
       {registrations.length === 0 ? (
         <p>No registrations found.</p>
       ) : (
