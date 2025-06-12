@@ -1,42 +1,35 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Dashboard = () => {
-  const [proposals, setProposals] = useState([]);
+function Dashboard() {
+  const [registrations, setRegistrations] = useState([]);
 
   useEffect(() => {
-    const fetchProposals = async () => {
-      try {
-        const response = await fetch("https://shieldunion-backend.onrender.com/api/proposals");
-        const data = await response.json();
-        setProposals(data);
-      } catch (error) {
-        console.error("Error fetching proposals:", error);
-      }
-    };
-
-    fetchProposals();
+    axios.get("https://shieldunion-backend.onrender.com/api/registrations")
+      .then((res) => {
+        setRegistrations(res.data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch registrations:", err);
+      });
   }, []);
 
   return (
     <div>
-      <h2>DAO Dashboard</h2>
-      {proposals.length === 0 ? (
-        <p>No proposals found yet.</p>
+      <h1 className="text-xl font-bold mb-4">Registered Members</h1>
+      {registrations.length === 0 ? (
+        <p>No registrations found.</p>
       ) : (
-        <ul>
-          {proposals.map((proposal) => (
-            <li key={proposal.id}>
-              <h3>{proposal.title}</h3>
-              <p>{proposal.description}</p>
-              <p>Status: {proposal.status}</p>
-              <p>Votes: {proposal.votes}</p>
-              <p>Submitted: {new Date(proposal.submittedAt).toLocaleString()}</p>
-            </li>
-          ))}
-        </ul>
+        registrations.map((r, index) => (
+          <div key={index} className="mb-4 p-3 border rounded shadow">
+            <p><strong>Name:</strong> {r.fullName}</p>
+            <p><strong>Email:</strong> {r.email}</p>
+            <p><strong>Tier:</strong> {r.incomeTier}</p>
+          </div>
+        ))
       )}
     </div>
   );
-};
+}
 
 export default Dashboard;
