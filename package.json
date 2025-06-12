@@ -1,44 +1,23 @@
 {
   "name": "shieldunion-frontend",
   "version": "1.0.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "engines": {
-    "node": "18.x"
-  },
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
-=======
-<<<<<<< HEAD
-  "scripts": {
-    "build": "npm run build --prefix frontend && cp -r frontend/dist ./dist"
-=======
-=======
->>>>>>> 528ad1c (Fixed package.json, Dashboard.jsx and synced frontend)
-  "engines": {
-    "node": "18.x"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-<<<<<<< HEAD
->>>>>>> f664155 (Reset package.json and Dashboard.jsx to working state)
->>>>>>> 0a6e81b (Reset package.json and Dashboard.jsx to working state)
-=======
->>>>>>> 528ad1c (Fixed package.json, Dashboard.jsx and synced frontend)
   },
   "dependencies": {
-    "axios": "^1.9.0",
-    "path": "^0.12.7",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^6.0.0"
+    "axios": "^1.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.5.1",
-    "vite": "^4.0.0"
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.2.0"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
