@@ -25,16 +25,11 @@ const Register = () => {
     }
 
     try {
-      const res = await axios.post("https://shieldunion-backend.onrender.com/api/register", {
-        fullName: formData.fullName,
-        email: formData.email,
-        password: formData.password,
-        incomeTier: formData.incomeTier,
-      });
-
-      setMessage(res.data.message || "Registration successful.");
-    } catch (err) {
-      setMessage(err.response?.data?.error || "Registration failed.");
+      await axios.post("https://shieldunion-backend.onrender.com/case1", caseData);
+      setMessage("Registered successfully");
+    } catch (error) {
+      console.error("Registration failed:", error);
+      setMessage("Registration failed");
     }
   };
 
@@ -43,56 +38,66 @@ const Register = () => {
       <h2 className="text-2xl font-bold mb-4">Register for ShieldUnion</h2>
       <form onSubmit={handleSubmit} className="space-y-3">
         <input
+          type="text"
           name="fullName"
           placeholder="Full Name"
+          value={formData.fullName}
           onChange={handleChange}
-          className="w-full p-2 border"
           required
+          className="w-full border p-2"
         />
         <input
+          type="email"
           name="email"
           placeholder="Email"
-          type="email"
+          value={formData.email}
           onChange={handleChange}
-          className="w-full p-2 border"
           required
+          className="w-full border p-2"
         />
         <input
+          type="password"
           name="password"
           placeholder="Password"
-          type="password"
+          value={formData.password}
           onChange={handleChange}
-          className="w-full p-2 border"
           required
+          className="w-full border p-2"
         />
         <input
+          type="password"
           name="confirmPassword"
           placeholder="Confirm Password"
-          type="password"
+          value={formData.confirmPassword}
           onChange={handleChange}
-          className="w-full p-2 border"
           required
+          className="w-full border p-2"
         />
         <select
           name="incomeTier"
+          value={formData.incomeTier}
           onChange={handleChange}
-          className="w-full p-2 border"
           required
+          className="w-full border p-2"
         >
           <option value="">Select Income Tier</option>
-          <option value="A">Tier A (£0–10,000)</option>
-          <option value="B">Tier B (£10,001–15,000)</option>
-          <option value="C">Tier C (£15,001–25,000)</option>
-          <option value="D">Tier D (£25,001–50,000)</option>
-          <option value="E">Tier E (£50,001–100,000)</option>
-          <option value="F">Tier F (£100,001–200,000)</option>
-          <option value="G">Tier G (Over £200,000)</option>
+          <option value="Tier A">Tier A (£0–10,000)</option>
+          <option value="Tier B">Tier B (£10,001–15,000)</option>
+          <option value="Tier C">Tier C (£15,001–25,000)</option>
+          <option value="Tier D">Tier D (£25,001–50,000)</option>
+          <option value="Tier E">Tier E (£50,001–100,000)</option>
+          <option value="Tier F">Tier F (£100,001–£200,000)</option>
+          <option value="Tier G">Tier G (Over £200,000)</option>
         </select>
-        <button type="submit" className="bg-blue-600 text-white p-2 w-full">
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+        >
           Register
         </button>
       </form>
-      {message && <p className="mt-2 text-center text-sm">{message}</p>}
+
+      {message && <p className="mt-4">{message}</p>}
     </div>
   );
 };
