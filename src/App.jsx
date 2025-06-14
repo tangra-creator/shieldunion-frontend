@@ -22,34 +22,16 @@ import Contact from './pages/Contact';
 
 function App() {
   return (
-    <Router>
-      {/* ✅ Navigation Bar */}
-      <nav className="p-4 bg-gray-100 mb-6 flex flex-wrap gap-4">
-        <Link to="/" className="text-blue-600 underline">Home</Link>
-        <Link to="/dashboard" className="text-blue-600 underline">Dashboard</Link>
-        <Link to="/register" className="text-blue-600 underline">Register</Link>
-        <Link to="/about" className="text-blue-600 underline">About</Link>
-        <Link to="/contact" className="text-blue-600 underline">Contact</Link>
-        <Link to="/privacy" className="text-blue-600 underline">Privacy</Link>
-        <Link to="/terms" className="text-blue-600 underline">Terms</Link>
-      </nav>
+  <>
+    <nav>... links ...</nav>
+    <Routes>
+      ... your routes ...
+    </Routes>
+  </>
+);
 
-      {/* ✅ Page Routing */}
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/submit" element={<SubmitCase />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/proposal" element={<ProposalForm />} />
-        <Route path="/vault" element={<Vault />} />
-        <Route path="/civguard" element={<CivGuardApply />} />
-        <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/daocontrol" element={<DAOControl />} />
-        <Route path="/infotrade" element={<InfoTrade />} />
-        <Route path="/memberprofile" element={<MemberProfile />} />
-        <Route path="/mycases" element={<MyCases />} />
-        <Route path="/myprotection" element={<MyProtection />} />
-      </Routes>
-    </Router>
+      
+   
   );
 }
 
