@@ -18,7 +18,7 @@ import MyProtection from './pages/MyProtection';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import About from './pages/About';
-import Contact from './pages/Contact';
+
 
 function App() {
   return (
@@ -29,7 +29,6 @@ function App() {
         <Link to="/dashboard" className="text-blue-600 underline">Dashboard</Link>
         <Link to="/register" className="text-blue-600 underline">Register</Link>
         <Link to="/about" className="text-blue-600 underline">About</Link>
-        <Link to="/contact" className="text-blue-600 underline">Contact</Link>
         <Link to="/privacy" className="text-blue-600 underline">Privacy</Link>
         <Link to="/terms" className="text-blue-600 underline">Terms</Link>
       </nav>
