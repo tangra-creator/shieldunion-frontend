@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -19,15 +18,6 @@ import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import About from './pages/About';
 import Contact from './pages/Contact';
-=======
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"; // make sure Link is imported
-import AboutUs from './pages/AboutUs';
-import Contact from './pages/Contact';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfUse from './pages/TermsOfUse';
-
-// your existing imports stay as they are...
->>>>>>> d54881f (Fix build issues and install proper Node version)
 
 function App() {
   return (
@@ -50,26 +40,13 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/proposal" element={<ProposalForm />} />
         <Route path="/vault" element={<Vault />} />
-<<<<<<< HEAD
         <Route path="/civguard" element={<CivGuardApply />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/daocontrol" element={<DAOControl />} />
         <Route path="/infotrade" element={<InfoTrade />} />
-        <Route path="/profile" element={<MemberProfile />} />
+        <Route path="/memberprofile" element={<MemberProfile />} />
         <Route path="/mycases" element={<MyCases />} />
         <Route path="/myprotection" element={<MyProtection />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<Home />} />
-=======
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsOfUse />} />
-        {/* Add others as needed */}
->>>>>>> d54881f (Fix build issues and install proper Node version)
       </Routes>
     </Router>
   );
