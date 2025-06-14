@@ -1,8 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-
-
+const Home = () => {
+  return (
+    <div className="p-8 max-w-4xl mx-auto text-center">
+      <h1 className="text-4xl font-bold">Welcome to ShieldUnion</h1>
+      <p className="mt-2 text-gray-600">
+        The backend is live and your protection is active.
+      </p>
     <div className="p-8 max-w-4xl mx-auto text-center">
       <div className="mb-6">
         <img src="/vite.svg" alt="ShieldUnion Logo" className="w-16 mx-auto mb-2" />
