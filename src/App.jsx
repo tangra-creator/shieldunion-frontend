@@ -22,6 +22,18 @@ import Contact from './pages/Contact';
 function App() {
   return (
     <Router>
+      {/* ✅ Navigation Bar */}
+      <nav className="p-4 bg-gray-100 mb-6 flex flex-wrap gap-4">
+        <Link to="/" className="text-blue-600 underline">Home</Link>
+        <Link to="/dashboard" className="text-blue-600 underline">Dashboard</Link>
+        <Link to="/register" className="text-blue-600 underline">Register</Link>
+        <Link to="/about" className="text-blue-600 underline">About</Link>
+        <Link to="/contact" className="text-blue-600 underline">Contact</Link>
+        <Link to="/privacy" className="text-blue-600 underline">Privacy</Link>
+        <Link to="/terms" className="text-blue-600 underline">Terms</Link>
+      </nav>
+
+      {/* ✅ Page Routing */}
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/submit" element={<SubmitCase />} />
@@ -32,14 +44,9 @@ function App() {
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/daocontrol" element={<DAOControl />} />
         <Route path="/infotrade" element={<InfoTrade />} />
-        <Route path="/profile" element={<MemberProfile />} />
+        <Route path="/memberprofile" element={<MemberProfile />} />
         <Route path="/mycases" element={<MyCases />} />
         <Route path="/myprotection" element={<MyProtection />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<Home />} />
       </Routes>
     </Router>
   );
