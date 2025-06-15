@@ -14,10 +14,11 @@ import Contact from './pages/Contact';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import MemberPortal from './pages/MemberPortal';
-import Dashboard from './pages/Dashboard';
 import MyCases from './pages/MyCases';
 import MyProtection from './pages/MyProtection';
 import MemberProfile from './pages/MemberProfile';
+import PublicDashboard from './pages/PublicDashboard';
+
 
 
 
@@ -38,6 +39,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/dashboard" element={<PublicDashboard />} />
+
 
         {/* MEMBER AREA */}
         <Route path="/member" element={<MemberPortal />}>
