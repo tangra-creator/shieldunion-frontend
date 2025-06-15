@@ -13,6 +13,11 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import MemberPortal from './pages/MemberPortal';
+import Dashboard from './pages/Dashboard';
+import MyCases from './pages/MyCases';
+import MyProtection from './pages/MyProtection';
+import MemberProfile from './pages/MemberProfile';
 
 
 
@@ -24,7 +29,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/submit" element={<SubmitCase />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/info" element={<InfoTrade />} />
         <Route path="/dao" element={<DAO />} />
         <Route path="/vault" element={<ClassifiedVault />} />
@@ -34,9 +38,18 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+
+        {/* MEMBER AREA */}
+        <Route path="/member" element={<MemberPortal />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="mycases" element={<MyCases />} />
+          <Route path="myprotection" element={<MyProtection />} />
+          <Route path="profile" element={<MemberProfile />} />
+        </Route>
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
