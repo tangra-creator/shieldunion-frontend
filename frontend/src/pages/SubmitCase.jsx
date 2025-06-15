@@ -12,7 +12,14 @@ const SubmitCase = () => {
   };
 
   return (
-    <div>
+    <div style={{
+      maxWidth: "600px",
+      margin: "50px auto",
+      padding: "20px",
+      backgroundColor: "#f9f9f9",
+      borderRadius: "10px",
+      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)"
+    }}>
       <h2>🚨 Submit Urgent Protection Case</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -22,6 +29,7 @@ const SubmitCase = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
           />
         </label>
         <br />
@@ -32,6 +40,7 @@ const SubmitCase = () => {
             onChange={(e) => setDetails(e.target.value)}
             rows={5}
             required
+            style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
           ></textarea>
         </label>
         <br />
@@ -40,6 +49,7 @@ const SubmitCase = () => {
           <input
             type="file"
             onChange={(e) => setEvidence(e.target.files[0])}
+            style={{ marginBottom: "10px" }}
           />
         </label>
         <br />
