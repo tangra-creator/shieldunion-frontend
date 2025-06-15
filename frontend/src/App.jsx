@@ -1,38 +1,38 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+
 import PublicDashboard from "./pages/PublicDashboard";
 import MemberDashboard from "./pages/MemberDashboard";
 import Register from "./pages/Register";
 import SubmitCase from "./pages/SubmitCase";
-import InfoTrade from "./pages/InfoTrade";
 import DAO from "./pages/DAO";
-import Vault from './pages/ClassifiedVault';
-import CivGuard from './pages/CivGuardApply';
-import Founder from './pages/FounderControl';
+import ClassifiedVault from "./pages/ClassifiedVault";
+import InfoTrade from "./pages/InfoTrade";
+import FounderControl from "./pages/FounderControl";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
-import Vote from "./pages/Vote";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<PublicDashboard />} />
-        <Route path="/dashboard" element={<PublicDashboard />} />
-        <Route path="/member" element={<MemberDashboard />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/submitcase" element={<SubmitCase />} />
-        <Route path="/infotrade" element={<InfoTrade />} />
-        <Route path="/dao" element={<DAO />} />
-        <Route path="/vault" element={<Vault />} />
-        <Route path="/civguard" element={<CivGuard />} />
-        <Route path="/founder" element={<Founder />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/vote" element={<Vote />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<PublicDashboard />} />
+          <Route path="dashboard" element={<PublicDashboard />} />
+          <Route path="member" element={<MemberDashboard />} />
+          <Route path="register" element={<Register />} />
+          <Route path="submitcase" element={<SubmitCase />} />
+          <Route path="dao" element={<DAO />} />
+          <Route path="vault" element={<ClassifiedVault />} />
+          <Route path="infotrade" element={<InfoTrade />} />
+          <Route path="founder" element={<FounderControl />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="terms" element={<Terms />} />
+          <Route path="privacy" element={<Privacy />} />
+        </Route>
       </Routes>
     </Router>
   );
