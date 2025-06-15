@@ -6,7 +6,7 @@ export default function Navbar() {
       <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
       <Link to="/register" style={{ marginRight: '1rem' }}>Register</Link>
       <Link to="/submit" style={{ marginRight: '1rem' }}>Submit Case</Link>
-      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/dashboard" style={{ marginRight: '1rem' }}>Dashboard</Link>
       <Link to="/info" style={{ marginRight: '1rem' }}>InfoTrade</Link>
     </nav>
   );
