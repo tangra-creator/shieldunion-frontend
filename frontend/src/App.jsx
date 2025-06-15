@@ -18,6 +18,8 @@ import MyCases from './pages/MyCases';
 import MyProtection from './pages/MyProtection';
 import MemberProfile from './pages/MemberProfile';
 import PublicDashboard from './pages/PublicDashboard';
+import DAOVoting from './components/DAOVoting';
+
 
 
 
@@ -40,6 +42,7 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/dashboard" element={<PublicDashboard />} />
+        <Route path="/dao/vote" element={<DAOVoting />} />
 
 
         {/* MEMBER AREA */}

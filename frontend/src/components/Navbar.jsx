@@ -16,6 +16,7 @@ export default function Navbar() {
       <Link to="/contact" style={{ marginRight: '1rem' }}>Contact</Link>
       <Link to="/terms" style={{ marginRight: '1rem' }}>Terms</Link>
       <Link to="/privacy" style={{ marginRight: '1rem' }}>Privacy</Link>
+      <Link to="/dao/vote" style={{ marginRight: '1rem' }}>Vote</Link>
     </nav>
   );
 }
