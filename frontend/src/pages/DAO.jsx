@@ -1,5 +1,6 @@
 import React from "react";
-import DAOVoting from "../components/DAOvoting";
+import DAOVoting from "../components/DAOVoting";
+
 
 const DAO = () => {
   return (
