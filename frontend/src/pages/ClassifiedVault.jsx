@@ -1,8 +1,8 @@
-// src/pages/Vaults.jsx
+// src/pages/ClassifiedVault.jsx
 
 import React, { useState } from 'react';
 
-const Vaults = () => {
+const ClassifiedVault = () => {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState('');
 
@@ -18,8 +18,8 @@ const Vaults = () => {
       return;
     }
 
-    // Future: Submit to DAO-secured backend (IPFS, encrypted vault, etc)
-    setStatus(`✅ ${file.name} uploaded for DAO review.`);
+    // Future: Upload securely via DAO or IPFS
+    setStatus(`✅ ${file.name} uploaded for DAO verification.`);
     setFile(null);
   };
 
@@ -36,4 +36,4 @@ const Vaults = () => {
   );
 };
 
-export default Vaults;
+export default ClassifiedVault;

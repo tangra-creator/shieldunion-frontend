@@ -6,7 +6,7 @@ import SubmitCase from './pages/SubmitCase';
 import Dashboard from './pages/Dashboard';
 import InfoTrade from './pages/InfoTrade';
 import DAO from './pages/DAO';
-import Vaults from './pages/Vaults';
+import ClassifiedVault from './pages/ClassifiedVault';
 
 
 
@@ -21,7 +21,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/info" element={<InfoTrade />} />
         <Route path="/dao" element={<DAO />} />
-        <Route path="/vault" element={<Vaults />} />
+        <Route path="/vault" element={<ClassifiedVault />} />
       </Routes>
     </Router>
   );
