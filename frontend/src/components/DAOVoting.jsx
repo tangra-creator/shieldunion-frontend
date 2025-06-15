@@ -12,60 +12,51 @@ const DAOVoting = () => {
         const res = await axios.get(`${API}/api/proposals`);
         setProposals(res.data);
       } catch (err) {
-        console.error('Error fetching proposals:', err);
+        console.error("Failed to fetch proposals:", err);
       }
     };
 
     fetchProposals();
   }, []);
 
-  const handleVote = (proposalId, voteType) => {
-    if (votes[proposalId]) return; // Already voted
-    setProposals((prev) =>
-      prev.map((p) =>
-        p.id === proposalId
-          ? {
-              ...p,
-              votesYes: voteType === 'yes' ? p.votesYes + 1 : p.votesYes,
-              votesNo: voteType === 'no' ? p.votesNo + 1 : p.votesNo,
-            }
-          : p
-      )
-    );
-    setVotes({ ...votes, [proposalId]: voteType });
+  const handleVote = async (proposalId, type) => {
+    if (votes[proposalId]) return;
+
+    try {
+      setVotes((prev) => ({ ...prev, [proposalId]: type }));
+
+      // Optional: send vote to backend
+      // await axios.post(`${API}/api/vote`, { proposalId, type });
+
+      setProposals((prev) =>
+        prev.map((p) =>
+          p.id === proposalId
+            ? {
+                ...p,
+                votesYes: type === "yes" ? p.votesYes + 1 : p.votesYes,
+                votesNo: type === "no" ? p.votesNo + 1 : p.votesNo,
+              }
+            : p
+        )
+      );
+    } catch (err) {
+      console.error("Vote error:", err);
+    }
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>🗳️ DAO Voting</h2>
-      {proposals.map((proposal) => (
-        <div
-          key={proposal.id}
-          style={{
-            border: '1px solid #ccc',
-            padding: '10px',
-            marginBottom: '10px',
-          }}
-        >
-          <h3>{proposal.title}</h3>
-          <p>{proposal.description}</p>
-          <p>📅 Deadline: {proposal.deadline}</p>
-          <p>
-            ✅ Yes: {proposal.votesYes} | ❌ No: {proposal.votesNo}
-          </p>
-          {!votes[proposal.id] ? (
-            <>
-              <button onClick={() => handleVote(proposal.id, 'yes')}>Vote Yes ✅</button>
-              <button
-                onClick={() => handleVote(proposal.id, 'no')}
-                style={{ marginLeft: '10px' }}
-              >
-                Vote No ❌
-              </button>
-            </>
-          ) : (
-            <p>You voted: {votes[proposal.id].toUpperCase()}</p>
-          )}
+    <div>
+      <h2>🗳 DAO Proposals</h2>
+      {proposals.map((p) => (
+        <div key={p.id} style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
+          <h4>{p.title}</h4>
+          <p>{p.description}</p>
+          <button onClick={() => handleVote(p.id, "yes")} disabled={votes[p.id]}>
+            ✅ Yes ({p.votesYes})
+          </button>
+          <button onClick={() => handleVote(p.id, "no")} disabled={votes[p.id]}>
+            ❌ No ({p.votesNo})
+          </button>
         </div>
       ))}
     </div>
