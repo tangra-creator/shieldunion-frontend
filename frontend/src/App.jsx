@@ -8,6 +8,7 @@ import InfoTrade from './pages/InfoTrade';
 import DAO from './pages/DAO';
 import ClassifiedVault from './pages/ClassifiedVault';
 import CivGuardApply from './pages/CivGuardApply';
+import FounderControl from './pages/FounderControl';
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/dao" element={<DAO />} />
         <Route path="/vault" element={<ClassifiedVault />} />
         <Route path="/civguard" element={<CivGuardApply />} />
+        <Route path="/founder" element={<FounderControl />} />
       </Routes>
     </Router>
   );

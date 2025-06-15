@@ -11,6 +11,7 @@ export default function Navbar() {
       <Link to="/dao" style={{ marginRight: '1rem' }}>DAO</Link>
       <Link to="/vault" style={{ marginRight: '1rem' }}>Vault</Link>
       <Link to="/civguard" style={{ marginRight: '1rem' }}>CivGuard</Link>
+      <Link to="/founder" style={{ marginRight: '1rem' }}>Founder</Link>
     </nav>
   );
 }
