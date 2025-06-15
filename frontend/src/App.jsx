@@ -7,7 +7,7 @@ import InfoTrade from "./pages/InfoTrade";
 import DAO from "./pages/DAO";
 import Vault from './pages/ClassifiedVault';
 import CivGuard from './pages/CivGuardApply';
-import Founder from "./pages/Founder";
+import Founder from './pages/FounderControl';
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
