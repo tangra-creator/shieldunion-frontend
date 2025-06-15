@@ -11,7 +11,14 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div style={{
+      maxWidth: "500px",
+      margin: "50px auto",
+      padding: "20px",
+      backgroundColor: "#f9f9f9",
+      borderRadius: "10px",
+      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)"
+    }}>
       <h2>📝 Anonymous Member Registration</h2>
       <form onSubmit={handleRegister}>
         <label>

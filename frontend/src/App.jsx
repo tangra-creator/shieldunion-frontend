@@ -1,15 +1,15 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Register from './pages/Register'; // 👈 use your actual filename
+import Navbar from './components/Navbar'; // Optional if you created it
 
 function App() {
   return (
     <Router>
-      <nav>
-        <a href="/">Home</a> | <a href="/register">Register</a>
-      </nav>
+      <Navbar /> {/* Optional but useful */}
       <Routes>
-        <Route path="/" element={<div>Welcome to ShieldUnion</div>} />
-        <Route path="/register" element={<div>Register Page</div>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
