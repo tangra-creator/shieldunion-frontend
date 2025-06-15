@@ -1,8 +1,17 @@
+import React from "react";
+
 const Dashboard = () => {
   return (
-    <div style={{ padding: "2rem", fontSize: "24px", color: "#1e40af" }}>
-      <h2>🛡️ ShieldUnion Dashboard</h2>
-      <p>This is a live page served from <strong>Dashboard.jsx</strong></p>
+    <div style={{
+      maxWidth: "600px",
+      margin: "50px auto",
+      padding: "20px",
+      backgroundColor: "#f9f9f9",
+      borderRadius: "10px",
+      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)"
+    }}>
+      <h2>📊 CivGuard Dashboard</h2>
+      <p>This will show submitted cases and protection activity.</p>
     </div>
   );
 };
