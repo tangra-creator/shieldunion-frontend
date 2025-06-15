@@ -12,6 +12,10 @@ export default function Navbar() {
       <Link to="/vault" style={{ marginRight: '1rem' }}>Vault</Link>
       <Link to="/civguard" style={{ marginRight: '1rem' }}>CivGuard</Link>
       <Link to="/founder" style={{ marginRight: '1rem' }}>Founder</Link>
+      <Link to="/about" style={{ marginRight: '1rem' }}>About</Link>
+      <Link to="/contact" style={{ marginRight: '1rem' }}>Contact</Link>
+      <Link to="/terms" style={{ marginRight: '1rem' }}>Terms</Link>
+      <Link to="/privacy" style={{ marginRight: '1rem' }}>Privacy</Link>
     </nav>
   );
 }
