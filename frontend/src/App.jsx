@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 import SubmitCase from "./pages/SubmitCase";
 import InfoTrade from "./pages/InfoTrade";
 import DAO from "./pages/DAO";
-import Vault from "./pages/Vault";
+import Vault from './pages/ClassifiedVault';
 import CivGuard from "./pages/CivGuard";
 import Founder from "./pages/Founder";
 import About from "./pages/About";
