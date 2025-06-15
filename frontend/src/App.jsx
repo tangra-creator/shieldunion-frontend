@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'; // Optional if you created it
 import SubmitCase from './pages/SubmitCase';
 import Dashboard from './pages/Dashboard';
 import InfoTrade from './pages/InfoTrade';
+import DAO from './pages/DAO';
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/submit" element={<SubmitCase />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/info" element={<InfoTrade />} />
+        <Route path="/dao" element={<DAO />} />
       </Routes>
     </Router>
   );
