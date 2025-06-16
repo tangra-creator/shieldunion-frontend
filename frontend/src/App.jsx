@@ -13,6 +13,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import CivGuardDashboard from './pages/CivGuardDashboard';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
   <Route path="/" element={<Layout />}>
     <Route index element={<PublicDashboard />} />
     <Route path="dashboard" element={<PublicDashboard />} />
+    <Route path="civguard/dashboard" element={<CivGuardDashboard />} />
 
     {/* Public Routes */}
     <Route path="register" element={<Register />} />
