@@ -3,10 +3,11 @@ import React, { useState } from "react";
 const Register = () => {
   const [alias, setAlias] = useState("");
   const [wallet, setWallet] = useState("");
+  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    alert(`Registered anonymously as "${alias}" with wallet: ${wallet}`);
+    await axios.post(`${API}/register`, { alias, wallet });
     // Later: Save to decentralized backend or localStorage
   };
 

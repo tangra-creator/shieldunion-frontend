@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const CivGuardApply = () => {
   const [type, setType] = useState("solo");
@@ -16,10 +17,28 @@ const CivGuardApply = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Submitted: ${JSON.stringify(form)}`);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const res = await axios.post(`${API}/api/civguard/apply`, form);
+    alert("✅ Application submitted successfully!");
+    setForm({
+      fullName: "",
+      email: "",
+      profession: "",
+      region: "",
+      tier: "",
+      motivation: "",
+      groupName: "",
+    });
+    setType("solo");
+  } catch (err) {
+    console.error("Error submitting CivGuard application:", err);
+    alert("❌ Submission failed. Please try again.");
+  }
+};
+
 
   return (
     <div className="max-w-xl mx-auto p-4">
