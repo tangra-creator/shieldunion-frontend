@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="bg-gray-100 px-4 py-3 flex flex-wrap items-center justify-between shadow-sm">
   {/* Logo and Name */}
   <Link to="/" className="flex items-center gap-2 text-xl font-bold text-black">
-    <img src="/logo.png" alt="ShieldUnion Logo" className="h-8 w-8" />
+    <img src="/logo.png" alt="ShieldUnion Logo" className="h-8 w-8 mr-2" />
     ShieldUnion
   </Link>
 
