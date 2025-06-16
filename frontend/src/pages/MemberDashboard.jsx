@@ -1,19 +1,13 @@
-import React from "react";
+import React from 'react';
+import MemberLayout from '../components/MemberLayout';
 
-const Dashboard = () => {
+const MemberDashboard = () => {
   return (
-    <div style={{
-      maxWidth: "600px",
-      margin: "50px auto",
-      padding: "20px",
-      backgroundColor: "#f9f9f9",
-      borderRadius: "10px",
-      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)"
-    }}>
-      <h2>📊 CivGuard Dashboard</h2>
-      <p>This will show submitted cases and protection activity.</p>
-    </div>
+    <MemberLayout>
+      <h2 className="text-2xl font-semibold mb-4">Welcome to your dashboard</h2>
+      {/* Add more dashboard content here */}
+    </MemberLayout>
   );
 };
 
-export default Dashboard;
+export default MemberDashboard;

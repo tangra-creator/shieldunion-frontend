@@ -1,22 +1,14 @@
-import React from "react";
-import DAOVoting from "../components/DAOVoting";
-
+// src/pages/DAO.jsx
+import React from 'react';
+import MemberLayout from '../components/MemberLayout';
+import DAOVoting from '../components/DAOVoting';
 
 const DAO = () => {
   return (
-    <div style={{
-      maxWidth: "700px",
-      margin: "50px auto",
-      padding: "20px",
-      backgroundColor: "#f9f9f9",
-      borderRadius: "10px",
-      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)"
-    }}>
-      <h2>🗳️ DAO Voting Panel</h2>
-      <p>Members can view proposals and cast votes below.</p>
-      
+    <MemberLayout>
+      <h2 className="text-2xl font-semibold mb-4">🗳️ DAO Voting</h2>
       <DAOVoting />
-    </div>
+    </MemberLayout>
   );
 };
 
