@@ -1,10 +1,18 @@
-module.exports = {
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+import aspectRatio from '@tailwindcss/aspect-ratio';
+
+export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    './index.html',
+    './src/**/*.{js,jsx}',
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    forms,
+    typography,
+    aspectRatio,
+  ],
 };
