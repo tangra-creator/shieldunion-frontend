@@ -6,12 +6,42 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f9fafb;
-  color: #333;
-  line-height: 1.6;
-  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #111;
 }
+
+nav {
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #0077cc;
+}
+
+main {
+  padding: 40px;
+}
+
+img {
+  vertical-align: middle;
+}
+
 
 /* Links */
 a {
