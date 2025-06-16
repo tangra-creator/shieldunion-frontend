@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="bg-gray-100 px-4 py-2 flex items-center justify-between shadow-sm">
       {/* Left: Logo + Brand Name */}
       <Link to="/" className="flex items-center space-x-2">
-        <img src="/favicon.png" alt="ShieldUnion Logo" className="h-10 w-10" />
+        <img src="/favicon.png" alt="ShieldUnion Logo" className="h-10 w-10 object-contain" style={{ maxWidth: '40px', maxHeight: '40px' }} />
         <span className="text-xl font-bold text-gray-800">ShieldUnion</span>
       </Link>
 
