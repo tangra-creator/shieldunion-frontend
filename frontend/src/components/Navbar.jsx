@@ -13,7 +13,6 @@ const Navbar = () => {
       <div className="flex space-x-4 text-sm text-gray-700">
         <Link to="/">Home</Link>
         <Link to="/register">Register</Link>
-        <Link to="/submitcase">Submit Case</Link>
         <Link to="/dashboard">Public Dashboard</Link>
         <Link to="/about">About</Link>
         <Link to="/contact">Contact</Link>
