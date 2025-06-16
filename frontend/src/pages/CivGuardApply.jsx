@@ -73,4 +73,5 @@ const CivGuardApply = () => {
     </div>
   );
 };
+export default CivGuardApply;
 
