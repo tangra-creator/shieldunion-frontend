@@ -16,7 +16,8 @@ const SubmitCase = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://shieldunion-backend.onrender.com/api/case", {
+      const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+      const response = await fetch(`${API}/api/submit-case`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify(caseData),
