@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import SmartChat from "../components/SmartChat"; // ✅ Add this import
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -62,6 +63,11 @@ const MyProtection = () => {
           {message}
         </div>
       )}
+
+      {/* ✅ Insert Smart Chat Section Below */}
+      <div className="mt-10">
+        <SmartChat caseId="CASE-2091" sender="member" />
+      </div>
     </div>
   );
 };

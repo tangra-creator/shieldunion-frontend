@@ -15,11 +15,15 @@ const Home = () => {
       </p>
 
       <Link
-        to="/register"
+        to="/join"
         className="inline-block bg-black text-white px-6 py-3 rounded-md shadow hover:bg-gray-800 transition"
       >
         Join Now
       </Link>
+
+      <p className="text-sm text-gray-500 mt-4">
+        Already registered? <Link to="/login" className="underline text-blue-600">Login here</Link>
+      </p>
     </div>
   );
 };

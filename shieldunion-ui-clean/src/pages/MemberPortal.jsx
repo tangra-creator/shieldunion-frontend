@@ -39,6 +39,14 @@ const MemberPortal = () => {
         >
           📤 Information Trade
         </Link>
+
+        {/* ✅ New Chat Entry Shortcut */}
+        <Link
+          to="/my-protection"
+          className="block bg-purple-700 text-white p-4 rounded text-center hover:bg-purple-800 transition"
+        >
+          🧠 Chat with CivGuard
+        </Link>
       </div>
     </div>
   );

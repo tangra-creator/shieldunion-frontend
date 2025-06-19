@@ -84,6 +84,15 @@ const ViewProposals = () => {
             </p>
           )}
 
+          {/* 🧠 AI Summary */}
+          {p.aiSummary && (
+            <div className="mt-2 p-3 bg-yellow-50 border border-yellow-300 rounded">
+              <p className="text-sm text-yellow-800">
+                <strong>🧠 AI Summary:</strong> {p.aiSummary}
+              </p>
+            </div>
+          )}
+
           <div className="flex gap-4 mt-2">
             <button
               onClick={() => handleVote(p._id, "yes")}
