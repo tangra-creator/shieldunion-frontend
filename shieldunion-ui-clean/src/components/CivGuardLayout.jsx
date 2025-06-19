@@ -1,12 +1,28 @@
 import React from 'react';
 import CivGuardNavbar from './CivGuardNavbar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 
 const CivGuardLayout = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100">
+      {/* 🔙 Back to Main Home */}
+      <div className="bg-white shadow p-4 flex justify-between items-center">
+        <h2 className="text-xl font-semibold text-gray-800">🛡️ CivGuard Panel</h2>
+        <Link
+          to="/"
+          className="text-blue-600 hover:text-blue-800 underline text-sm"
+        >
+          ← Back to ShieldUnion Home
+        </Link>
+      </div>
+
+      {/* 🔽 CivGuard Navigation */}
       <CivGuardNavbar />
-      <Outlet /> {/* 👈 This is the missing part if your page is blank */}
+
+      {/* 📄 Page Content */}
+      <div className="p-6">
+        <Outlet />
+      </div>
     </div>
   );
 };
