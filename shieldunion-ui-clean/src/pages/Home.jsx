@@ -34,44 +34,41 @@ const Home = () => {
         <div className="aspect-w-16 aspect-h-9 mb-8">
           <iframe
             className="w-full h-64 md:h-96 rounded shadow"
-            src="https://www.youtube.com/embed/placeholder_intro"
-            title="ShieldUnion Platform Intro"
+            src="https://www.youtube.com/embed/Hyh3h_yIDf0"
+            title="What is a DAO?"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
         </div>
 
-        {/* 👮 CivGuard Overview */}
         <h2 className="text-2xl font-semibold text-gray-800 mb-3">🛡️ CivGuard: Verified Protectors</h2>
         <div className="aspect-w-16 aspect-h-9 mb-8">
           <iframe
             className="w-full h-64 md:h-96 rounded shadow"
-            src="https://www.youtube.com/embed/placeholder_civguard"
-            title="CivGuard Explainer"
+            src="https://www.youtube.com/embed/Ropj9L9ULmU"
+            title="Privacy Tools for Activists"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
         </div>
 
-        {/* 💸 Protection for £6 */}
         <h2 className="text-2xl font-semibold text-gray-800 mb-3">💸 Full Protection for £6</h2>
         <div className="aspect-w-16 aspect-h-9 mb-8">
           <iframe
             className="w-full h-64 md:h-96 rounded shadow"
-            src="https://www.youtube.com/embed/placeholder_member"
-            title="Member Benefits"
+            src="https://www.youtube.com/embed/H7aXzZsj5vI"
+            title="Human Rights & Tech"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
         </div>
 
-        {/* 🌍 Global InfoTrade */}
         <h2 className="text-2xl font-semibold text-gray-800 mb-3">🌍 InfoTrade: Sell Truth. Buy Justice.</h2>
         <div className="aspect-w-16 aspect-h-9">
           <iframe
             className="w-full h-64 md:h-96 rounded shadow"
-            src="https://www.youtube.com/embed/placeholder_infotrade"
-            title="InfoTrade System"
+            src="https://www.youtube.com/embed/2rCyK1mK8fs"
+            title="Decentralized Justice"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
