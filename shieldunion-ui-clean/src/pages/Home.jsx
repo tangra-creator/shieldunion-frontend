@@ -28,45 +28,27 @@ const Home = () => {
         </Link>
       </p>
 
-      {/* 🎥 Video/Promo Sections as Images */}
-      <div className="mt-12 w-full max-w-4xl space-y-12">
-
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">🎥 ShieldUnion: How It Works</h2>
-          <img
-            src="/assets/placeholder_platform.png"
-            alt="ShieldUnion Platform Overview"
-            className="w-full rounded shadow"
-          />
+      {/* 🔒 Video placeholders - replace with real video links later */}
+      <div className="mt-12 w-full max-w-4xl">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">🎥 ShieldUnion: How It Works</h2>
+        <div className="aspect-w-16 aspect-h-9 mb-8">
+          <img src="/placeholder-video.png" alt="Platform Overview" className="w-full h-64 md:h-96 rounded shadow object-cover" />
         </div>
 
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">🛡️ CivGuard: Verified Protectors</h2>
-          <img
-            src="/assets/placeholder_civguard.png"
-            alt="CivGuard Overview"
-            className="w-full rounded shadow"
-          />
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">🛡️ CivGuard: Verified Protectors</h2>
+        <div className="aspect-w-16 aspect-h-9 mb-8">
+          <img src="/placeholder-video.png" alt="CivGuard Explainer" className="w-full h-64 md:h-96 rounded shadow object-cover" />
         </div>
 
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">💸 Full Protection for £6</h2>
-          <img
-            src="/assets/placeholder_6pounds.png"
-            alt="Affordable Protection"
-            className="w-full rounded shadow"
-          />
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">💸 Full Protection for £6</h2>
+        <div className="aspect-w-16 aspect-h-9 mb-8">
+          <img src="/placeholder-video.png" alt="Member Benefits" className="w-full h-64 md:h-96 rounded shadow object-cover" />
         </div>
 
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">🌍 InfoTrade: Sell Truth. Buy Justice.</h2>
-          <img
-            src="/assets/placeholder_infotrade.png"
-            alt="InfoTrade System"
-            className="w-full rounded shadow"
-          />
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">🌍 InfoTrade: Sell Truth. Buy Justice.</h2>
+        <div className="aspect-w-16 aspect-h-9">
+          <img src="/placeholder-video.png" alt="InfoTrade" className="w-full h-64 md:h-96 rounded shadow object-cover" />
         </div>
-        
       </div>
     </div>
   );
