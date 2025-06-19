@@ -9,10 +9,27 @@ const Home = () => {
       </h1>
 
       <p className="text-lg max-w-xl text-gray-700 mb-6">
-        ShieldUnion is the world’s first unstoppable global protection platform defending people from injustice, corruption, and danger.
+        ShieldUnion is the world’s first unstoppable global protection platform
+        defending people from injustice, corruption, and danger.
         <br />
         Anonymous reporting. DAO voting. CivGuard response.
       </p>
+
+      <div className="bg-gray-100 rounded-lg p-6 max-w-3xl text-left text-gray-800 shadow mb-6">
+        <h2 className="text-2xl font-bold mb-3 text-black">🌍 ShieldUnion — The World’s First Global AI Justice Engine</h2>
+        <ul className="list-disc pl-5 space-y-2">
+          <li><strong>🔐 100% Anonymous</strong> reporting, evidence upload, and protection activation</li>
+          <li><strong>⚖️ DAO-powered justice</strong> — where verified users vote on real cases</li>
+          <li><strong>🛡️ CivGuard professionals</strong> respond: lawyers, investigators, security experts</li>
+          <li><strong>💡 Smart engine control</strong> — no human interference, no corruption</li>
+          <li><strong>💸 From £6/month</strong>, receive services worth thousands if your case is approved</li>
+          <li><strong>🌐 Global reach</strong>: Individuals, groups, and entire nations welcome</li>
+          <li><strong>🎯 InfoTrade</strong> — Earn by sharing verified evidence and truth</li>
+        </ul>
+        <p className="mt-4 text-sm text-gray-600">
+          Whether you're silenced, threatened, or seeking justice — ShieldUnion gives you a voice, a shield, and a system that works beyond borders.
+        </p>
+      </div>
 
       <Link
         to="/join"
@@ -24,34 +41,6 @@ const Home = () => {
       <p className="text-sm text-gray-500 mt-4">
         Already registered? <Link to="/login" className="underline text-blue-600">Login here</Link>
       </p>
-
-      {/* 🎥 Embedded Explainer Videos */}
-      <div className="mt-10 space-y-10 max-w-4xl w-full">
-        <div>
-          <h2 className="text-xl font-semibold mb-2 text-gray-800">🔒 What is ShieldUnion?</h2>
-          <iframe className="w-full h-64" src="/videos/intro.mp4" title="ShieldUnion Intro" controls></iframe>
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold mb-2 text-gray-800">👥 For Members – Full Protection for £6</h2>
-          <iframe className="w-full h-64" src="/videos/member-benefits.mp4" title="Member Benefits" controls></iframe>
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold mb-2 text-gray-800">🛡️ For CivGuards – Join the Fight</h2>
-          <iframe className="w-full h-64" src="/videos/civguard-call.mp4" title="CivGuard Promo" controls></iframe>
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold mb-2 text-gray-800">🧠 Smart Engine Control</h2>
-          <iframe className="w-full h-64" src="/videos/smart-engine.mp4" title="Smart AI Control" controls></iframe>
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold mb-2 text-gray-800">🌍 Trade Corruption Intelligence Globally</h2>
-          <iframe className="w-full h-64" src="/videos/infotrade.mp4" title="InfoTrade System" controls></iframe>
-        </div>
-      </div>
     </div>
   );
 };
