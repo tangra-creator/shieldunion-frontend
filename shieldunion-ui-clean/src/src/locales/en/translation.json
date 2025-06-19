@@ -1,0 +1,16 @@
+{
+  "home": {
+    "welcome": "Welcome to ShieldUnion",
+    "description": "ShieldUnion is the world’s first unstoppable global protection platform defending people from injustice, corruption, and danger.",
+    "subtitle": "Anonymous reporting. DAO voting. CivGuard response.",
+    "joinNow": "Join Now",
+    "alreadyRegistered": "Already registered?",
+    "loginHere": "Login here",
+    "video": {
+      "platform": "🎥 ShieldUnion: How It Works",
+      "civguard": "🛡️ CivGuard: Verified Protectors",
+      "sixPounds": "💸 Full Protection for £6",
+      "infotrade": "🌍 InfoTrade: Sell Truth. Buy Justice."
+    }
+  }
+}

@@ -1,36 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-white text-center flex flex-col items-center justify-center p-6 md:p-10">
       <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-        Welcome to ShieldUnion
+        {t('home.welcome')}
       </h1>
 
       <p className="text-lg max-w-2xl text-gray-700 mb-6">
-        ShieldUnion is the world’s first unstoppable global protection platform defending people from injustice, corruption, and danger.
+        {t('home.description')}
         <br />
-        Anonymous reporting. DAO voting. CivGuard response.
+        {t('home.subtitle')}
       </p>
 
       <Link
         to="/join"
         className="inline-block bg-black text-white px-6 py-3 rounded-md shadow hover:bg-gray-800 transition"
       >
-        Join Now
+        {t('home.joinNow')}
       </Link>
 
       <p className="text-sm text-gray-500 mt-3">
-        Already registered?{" "}
+        {t('home.alreadyRegistered')}{' '}
         <Link to="/login" className="underline text-blue-600">
-          Login here
+          {t('home.loginHere')}
         </Link>
       </p>
 
-      {/* 🎥 ShieldUnion Platform Overview */}
+      {/* 🎥 Videos */}
       <div className="mt-12 w-full max-w-4xl">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">🎥 ShieldUnion: How It Works</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">{t('home.video.platform')}</h2>
         <div className="aspect-w-16 aspect-h-9 mb-8">
           <iframe
             className="w-full h-64 md:h-96 rounded shadow"
@@ -41,8 +44,7 @@ const Home = () => {
           ></iframe>
         </div>
 
-        {/* 👮 CivGuard Overview */}
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">🛡️ CivGuard: Verified Protectors</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">{t('home.video.civguard')}</h2>
         <div className="aspect-w-16 aspect-h-9 mb-8">
           <iframe
             className="w-full h-64 md:h-96 rounded shadow"
@@ -53,8 +55,7 @@ const Home = () => {
           ></iframe>
         </div>
 
-        {/* 💸 Protection for £6 */}
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">💸 Full Protection for £6</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">{t('home.video.sixPounds')}</h2>
         <div className="aspect-w-16 aspect-h-9 mb-8">
           <iframe
             className="w-full h-64 md:h-96 rounded shadow"
@@ -65,8 +66,7 @@ const Home = () => {
           ></iframe>
         </div>
 
-        {/* 🌍 Global InfoTrade */}
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">🌍 InfoTrade: Sell Truth. Buy Justice.</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">{t('home.video.infotrade')}</h2>
         <div className="aspect-w-16 aspect-h-9">
           <iframe
             className="w-full h-64 md:h-96 rounded shadow"
