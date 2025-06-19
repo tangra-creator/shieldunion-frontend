@@ -28,10 +28,14 @@ import CivGuardFlag from "./pages/CivGuardFlag";
 import CivGuardReview from "./pages/CivGuardReview";
 import CivGuardVerify from "./pages/CivGuardVerify";
 import CivGuardFlagReview from "./pages/CivGuardFlagReview";
+import CivGuardChat from "./pages/CivGuardChat";
 
-// ✅ Chat Components
-import CivGuardChat from "./pages/CivGuardChat"; // ✅ FIXED: should be inside /pages/
-import SmartChat from "./components/SmartChat"; // Optional: for preview/testing
+// Layouts (Admin)
+import AdminLayout from "./components/AdminLayout";
+import AdminPanel from "./pages/AdminPanel";
+
+// Optional: Testing chat
+import SmartChat from "./components/SmartChat";
 
 function App() {
   return (
@@ -69,7 +73,12 @@ function App() {
           <Route path="chat" element={<CivGuardChat />} />
         </Route>
 
-        {/* 🧪 Optional: Live SmartChat preview (safe to remove later) */}
+        {/* 🛠️ Admin Area */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminPanel />} />
+        </Route>
+
+        {/* 🧪 Preview Only */}
         <Route
           path="/chat-preview"
           element={<SmartChat caseId="test123" sender="TestUser" />}
