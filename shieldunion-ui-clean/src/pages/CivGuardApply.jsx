@@ -15,7 +15,7 @@ const CivGuardApply = () => {
 
   const [selectedFile, setSelectedFile] = useState(null);
 
-  // 💰 Auto-calculate fee logic
+  // Auto-calculate fee logic
   useEffect(() => {
     const { type, groupSize, serviceLevel } = formData;
     const baseFee = 50;

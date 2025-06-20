@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from '../components/Footer'; // ✅ correct path
 
 const Home = () => {
+  const [freeJoinActive, setFreeJoinActive] = useState(true);
+
+  // Example: simulate checking current member count or promotion status
+  useEffect(() => {
+    // Replace this with actual API call to get current member count or promotion status
+    const checkPromotion = async () => {
+      try {
+        // const res = await fetch('/api/members/count');
+        // setFreeJoinActive(res.count < 1500);
+        
+        // For now, hardcoded to true (promotion active)
+        setFreeJoinActive(true);
+      } catch (err) {
+        console.error("Failed to check promotion status", err);
+        setFreeJoinActive(false);
+      }
+    };
+    checkPromotion();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-100">
       <main className="flex-grow flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-4xl text-center">
+
+          {/* Promotion Banner */}
+          {freeJoinActive && (
+            <div className="mb-6 bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded-lg shadow-md">
+              🎉 First 1500 Members Join Free! Become part of ShieldUnion now before fees apply.
+            </div>
+          )}
+
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
             🛡️ Welcome to <span className="text-black">ShieldUnion</span>
           </h1>
