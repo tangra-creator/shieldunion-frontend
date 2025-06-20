@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import axios from "axios";
 
 const PROMO_THRESHOLD = 1500;
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const Home = () => {
   const [totalMembers, setTotalMembers] = useState(0);
@@ -11,8 +12,8 @@ const Home = () => {
   useEffect(() => {
     const fetchTotalMembers = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/members/count");
-        setTotalMembers(res.data.count || 0);
+        const res = await axios.get(`${API}/api/member/total`);
+        setTotalMembers(res.data.total || 0);
       } catch (err) {
         console.error("Failed to fetch total members count:", err);
       }
@@ -56,16 +57,16 @@ const Home = () => {
           {/* Join Buttons - Responsive Stack */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
             <Link
-              to="/register?type=member"
+              to="/register/member"
               className="bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition text-sm sm:text-base"
             >
               🙋 Join as Member
             </Link>
             <Link
-              to="/register?type=civguard"
+              to="/register/civguard"
               className="border border-black text-black px-6 py-3 rounded hover:bg-black hover:text-white transition text-sm sm:text-base"
             >
-              🛡️ Join as CivGuard
+              🛡️ Apply as CivGuard
             </Link>
           </div>
         </div>
