@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Footer from '../components/Footer'; // ✅ correct path
+import Footer from "../components/Footer";
+import axios from "axios";
+
+const PROMO_THRESHOLD = 1500;
 
 const Home = () => {
-  const [freeJoinActive, setFreeJoinActive] = useState(true);
+  const [totalMembers, setTotalMembers] = useState(0);
 
-  // Example: simulate checking current member count or promotion status
   useEffect(() => {
-    // Replace this with actual API call to get current member count or promotion status
-    const checkPromotion = async () => {
+    const fetchTotalMembers = async () => {
       try {
-        // const res = await fetch('/api/members/count');
-        // setFreeJoinActive(res.count < 1500);
-        
-        // For now, hardcoded to true (promotion active)
-        setFreeJoinActive(true);
+        const res = await axios.get("http://localhost:5000/api/members/count");
+        setTotalMembers(res.data.count || 0);
       } catch (err) {
-        console.error("Failed to check promotion status", err);
-        setFreeJoinActive(false);
+        console.error("Failed to fetch total members count:", err);
       }
     };
-    checkPromotion();
+    fetchTotalMembers();
   }, []);
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-100">
       <main className="flex-grow flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-4xl text-center">
-
-          {/* Promotion Banner */}
-          {freeJoinActive && (
-            <div className="mb-6 bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded-lg shadow-md">
-              🎉 First 1500 Members Join Free! Become part of ShieldUnion now before fees apply.
+          {totalMembers < PROMO_THRESHOLD && (
+            <div className="mb-6 p-3 bg-green-100 border border-green-400 rounded text-green-700 text-center font-semibold">
+              🎉 First 1500 Members Join Free! Become part of ShieldUnion now before fees apply. <br />
+              After {PROMO_THRESHOLD} total members, all members will be charged normal fees.
             </div>
           )}
 
@@ -43,7 +39,7 @@ const Home = () => {
             The unstoppable global protection system powered by AI, DAO, and family legacy.
           </p>
 
-          {/* ✅ YouTube Video Embed Responsive */}
+          {/* YouTube Video Embed Responsive */}
           <div className="mb-10 w-full">
             <div className="relative" style={{ paddingTop: "56.25%" }}>
               <iframe
@@ -57,7 +53,7 @@ const Home = () => {
             </div>
           </div>
 
-          {/* ✅ Join Buttons - Responsive Stack */}
+          {/* Join Buttons - Responsive Stack */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
             <Link
               to="/register?type=member"
