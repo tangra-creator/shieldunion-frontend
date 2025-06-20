@@ -13,6 +13,7 @@ const Register = () => {
     income: "",
     groupSize: 1,
     documents: null,
+    idDocument: null,
   });
 
   const [calculatedFee, setCalculatedFee] = useState(0);
@@ -45,6 +46,8 @@ const Register = () => {
     const { name, value, files } = e.target;
     if (name === "documents") {
       setForm({ ...form, documents: files[0] });
+    } else if (name === "idDocument") {
+      setForm({ ...form, idDocument: files[0] });
     } else {
       setForm({ ...form, [name]: value });
     }
@@ -133,8 +136,20 @@ const Register = () => {
                 required
                 className="w-full text-sm"
               />
+            </div>
+
+            <div className="mt-3">
+              <label className="block font-semibold mb-1">Upload ID Document</label>
+              <input
+                type="file"
+                name="idDocument"
+                onChange={handleChange}
+                accept=".pdf,.jpg,.jpeg,.png"
+                required
+                className="w-full text-sm"
+              />
               <p className="text-xs text-gray-500 mt-1">
-                Upload payslip, tax doc, or valid ID with income info
+                Required for AI identity trust — not visible to public
               </p>
             </div>
           </>
@@ -172,7 +187,6 @@ const Register = () => {
           </>
         )}
 
-        {/* 💰 Fee Display (Only for CivGuard) */}
         {userType === "civguard" && (
           <div className="mt-2 font-bold text-base">
             💰 Total Fee: £{isNaN(calculatedFee) || calculatedFee === 0 ? "0.00" : calculatedFee}
