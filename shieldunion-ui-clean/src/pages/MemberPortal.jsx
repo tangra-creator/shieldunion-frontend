@@ -52,7 +52,8 @@ const MemberPortal = () => {
   );
 };
 
-import Footer from "./components/Footer";
+import Footer from '../components/Footer'; // ✅ correct
+
 
 function App() {
   return (

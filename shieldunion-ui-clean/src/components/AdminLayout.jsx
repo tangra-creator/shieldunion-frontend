@@ -29,7 +29,7 @@ const AdminLayout = () => {
   );
 };
 
-import Footer from "./components/Footer";
+import Footer from '../components/Footer';
 
 function App() {
   return (

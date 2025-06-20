@@ -18,7 +18,8 @@ const Layout = () => {
   );
 };
 
-import Footer from "./components/Footer";
+import Footer from '../components/Footer';
+
 
 function App() {
   return (

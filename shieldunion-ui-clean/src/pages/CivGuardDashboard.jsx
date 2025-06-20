@@ -49,18 +49,8 @@ const CivGuardDashboard = () => {
   );
 };
 
-import Footer from "./components/Footer";
 
-function App() {
-  return (
-    <>
-      <Routes>{/* your routes */}</Routes>
-      <Footer />
-    </>
-  );
-}
-
-import Footer from "./components/Footer";
+import Footer from '../components/Footer'; // ✅ correct
 
 function App() {
   return (
