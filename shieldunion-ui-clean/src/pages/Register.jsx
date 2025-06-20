@@ -18,7 +18,6 @@ const Register = () => {
   const [calculatedFee, setCalculatedFee] = useState(0);
   const [message, setMessage] = useState("");
 
-  // Fee logic
   useEffect(() => {
     if (userType === "member") {
       const income = parseFloat(form.income);
@@ -28,10 +27,10 @@ const Register = () => {
       else if (income <= 50000) setCalculatedFee(50);
       else if (income <= 100000) setCalculatedFee(100);
       else if (income <= 200000) setCalculatedFee(200);
-      else setCalculatedFee(500); // Gold default
+      else setCalculatedFee(500);
     } else if (userType === "civguard") {
       const base = 50;
-      const extra = (form.groupSize > 1 ? (form.groupSize - 1) * 25 : 0);
+      const extra = form.groupSize > 1 ? (form.groupSize - 1) * 25 : 0;
       setCalculatedFee(base + extra);
     }
   }, [form.income, form.groupSize, userType]);
@@ -66,55 +65,55 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 mt-10 bg-white rounded shadow">
-      <h2 className="text-3xl font-bold mb-4 text-center">
+    <div className="max-w-md w-full mx-auto p-4 sm:p-6 mt-6 bg-white rounded-2xl shadow-lg">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-center">
         {userType === "civguard" ? "🛡️ CivGuard Registration" : "🙋 Member Registration"}
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 text-sm">
         <div>
-          <label className="block font-semibold">Full Name</label>
+          <label className="block font-semibold mb-1">Full Name</label>
           <input
             type="text"
             name="name"
             value={form.name}
             onChange={handleChange}
             required
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded text-sm"
           />
         </div>
 
         <div>
-          <label className="block font-semibold">Email</label>
+          <label className="block font-semibold mb-1">Email</label>
           <input
             type="email"
             name="email"
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded text-sm"
           />
         </div>
 
         {userType === "member" && (
           <div>
-            <label className="block font-semibold">Your Annual Income (£)</label>
+            <label className="block font-semibold mb-1">Your Annual Income (£)</label>
             <input
               type="number"
               name="income"
               value={form.income}
               onChange={handleChange}
               required
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 rounded text-sm"
             />
-            <p className="text-sm mt-1 text-gray-500">Fee auto-calculated based on income.</p>
+            <p className="text-xs text-gray-500 mt-1">Fee auto-calculated based on income.</p>
           </div>
         )}
 
         {userType === "civguard" && (
           <>
             <div>
-              <label className="block font-semibold">CivGuard Group Size</label>
+              <label className="block font-semibold mb-1">CivGuard Group Size</label>
               <input
                 type="number"
                 name="groupSize"
@@ -122,41 +121,41 @@ const Register = () => {
                 value={form.groupSize}
                 onChange={handleChange}
                 required
-                className="w-full border px-3 py-2 rounded"
+                className="w-full border px-3 py-2 rounded text-sm"
               />
-              <p className="text-sm mt-1 text-gray-500">
-                Solo = £50 · +£25 per additional member
-              </p>
+              <p className="text-xs text-gray-500 mt-1">Solo = £50 · +£25 per extra person</p>
             </div>
 
             <div>
-              <label className="block font-semibold">Upload ID / Certificate</label>
+              <label className="block font-semibold mb-1">Upload ID / Certificate</label>
               <input
                 type="file"
                 name="documents"
                 onChange={handleChange}
                 accept=".pdf,.jpg,.jpeg,.png"
                 required
-                className="w-full"
+                className="w-full text-sm"
               />
             </div>
           </>
         )}
 
-        <div className="mt-4 font-bold">
+        <div className="mt-2 font-bold text-base">
           💰 Total Fee: £{calculatedFee}
         </div>
 
         <button
           type="submit"
-          className="w-full mt-4 bg-black text-white py-2 rounded hover:bg-gray-800"
+          className="w-full mt-4 bg-black text-white py-2 rounded hover:bg-gray-800 text-sm"
         >
           Submit Registration
         </button>
       </form>
 
       {message && (
-        <div className="mt-4 text-center font-semibold text-blue-600">{message}</div>
+        <div className="mt-4 text-center font-semibold text-blue-600 text-sm">
+          {message}
+        </div>
       )}
     </div>
   );
