@@ -9,14 +9,15 @@ const Home = () => {
           🛡️ Welcome to ShieldUnion
         </h1>
         <p className="text-lg md:text-xl text-gray-700 mb-8">
-          The unstoppable platform for truth, protection, and justice — powered by AI, DAO, and human legacy.
+          The unstoppable global protection system powered by AI, DAO, and family legacy.
         </p>
 
-        <div className="mb-10">
-          <div className="aspect-w-16 aspect-h-9 w-full rounded-lg shadow-lg overflow-hidden">
+        {/* ✅ YOUR VIDEO */}
+        <div className="mb-10 w-full">
+          <div className="aspect-w-16 aspect-h-9 w-full rounded-lg overflow-hidden">
             <iframe
               src="https://share.synthesia.io/embeds/videos/4aebfec9-3b43-4ae2-9945-a31736f0f550"
-              title="Intro Video"
+              title="ShieldUnion Intro Video"
               loading="lazy"
               allowFullScreen
               className="w-full h-96 rounded"
@@ -24,18 +25,19 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="flex justify-center gap-4">
+        {/* ✅ TWO JOIN OPTIONS */}
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
-            to="/register"
+            to="/register?type=member"
             className="bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition"
           >
-            🚀 Join Now
+            🙋 Join as Member
           </Link>
           <Link
-            to="/contact"
+            to="/register?type=civguard"
             className="border border-black text-black px-6 py-3 rounded hover:bg-black hover:text-white transition"
           >
-            📩 Contact
+            🛡️ Join as CivGuard
           </Link>
         </div>
       </div>
