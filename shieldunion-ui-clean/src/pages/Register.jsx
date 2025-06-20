@@ -21,17 +21,23 @@ const Register = () => {
   useEffect(() => {
     if (userType === "member") {
       const income = parseFloat(form.income);
-      if (income <= 10000) setCalculatedFee(6);
+      if (!form.income) {
+        setCalculatedFee(0);
+      } else if (income <= 10000) setCalculatedFee(6);
       else if (income <= 15000) setCalculatedFee(10);
       else if (income <= 25000) setCalculatedFee(20);
       else if (income <= 50000) setCalculatedFee(50);
       else if (income <= 100000) setCalculatedFee(100);
       else if (income <= 200000) setCalculatedFee(200);
-      else setCalculatedFee(500); // Default for Gold Tier
+      else setCalculatedFee(500); // Default Gold Tier
     } else if (userType === "civguard") {
-      const base = 50;
-      const extra = form.groupSize > 1 ? (form.groupSize - 1) * 25 : 0;
-      setCalculatedFee(base + extra);
+      if (!form.groupSize || form.groupSize < 1) {
+        setCalculatedFee(0);
+      } else {
+        const base = 50;
+        const extra = form.groupSize > 1 ? (form.groupSize - 1) * 25 : 0;
+        setCalculatedFee(base + extra);
+      }
     }
   }, [form.income, form.groupSize, userType]);
 
@@ -154,9 +160,12 @@ const Register = () => {
           </>
         )}
 
-        <div className="mt-2 font-bold text-base">
-          💰 Total Fee: £{calculatedFee}
-        </div>
+        {/* Show fee only when needed */}
+        {userType === "civguard" && (
+          <div className="mt-2 font-bold text-base">
+            💰 Total Fee: £{isNaN(calculatedFee) || calculatedFee === 0 ? "0.00" : calculatedFee}
+          </div>
+        )}
 
         <button
           type="submit"
