@@ -28,4 +28,15 @@ const AboutPlatform = () => {
   );
 };
 
+import Footer from "./components/Footer";
+
+function App() {
+  return (
+    <>
+      <Routes>{/* your routes */}</Routes>
+      <Footer />
+    </>
+  );
+}
+
 export default AboutPlatform;

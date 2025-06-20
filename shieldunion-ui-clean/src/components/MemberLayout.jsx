@@ -21,4 +21,28 @@ const MemberLayout = () => {
   );
 };
 
+import Footer from "../components/Footer"; // Adjust path if needed
+
+...
+
+return (
+  <div>
+    {/* ... existing layout */}
+    <Footer />
+  </div>
+);
+
+
+import Footer from "./components/Footer";
+
+function App() {
+  return (
+    <>
+      <Routes>{/* your routes */}</Routes>
+      <Footer />
+    </>
+  );
+}
+
+
 export default MemberLayout;

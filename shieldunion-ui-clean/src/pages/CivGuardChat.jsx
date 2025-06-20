@@ -97,4 +97,16 @@ const CivGuardChat = ({ caseId = "default-case-001" }) => {
   );
 };
 
+import Footer from "./components/Footer";
+
+function App() {
+  return (
+    <>
+      <Routes>{/* your routes */}</Routes>
+      <Footer />
+    </>
+  );
+}
+
+
 export default CivGuardChat;

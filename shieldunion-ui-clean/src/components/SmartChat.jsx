@@ -105,4 +105,28 @@ const SmartChat = ({ caseId, sender }) => {
   );
 };
 
+import Footer from "../components/Footer";
+
+...
+
+return (
+  <div className="min-h-screen flex flex-col justify-between">
+    <div className="flex-grow">{/* Chat logic here */}</div>
+    <Footer />
+  </div>
+);
+
+
+import Footer from "./components/Footer";
+
+function App() {
+  return (
+    <>
+      <Routes>{/* your routes */}</Routes>
+      <Footer />
+    </>
+  );
+}
+
+
 export default SmartChat;
