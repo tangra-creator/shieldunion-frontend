@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
-const PROMO_THRESHOLD = 1500; // First 1500 members free
+const PROMO_THRESHOLD = 1500;
+const TREASURY_WALLET = "0xB22f3f35Dcb16a1C2D7748a53D4e7c3f8143E043";
 
 const Register = () => {
   const location = useLocation();
@@ -16,6 +17,7 @@ const Register = () => {
     incomeTier: "",
     idDocument: null,
     incomeProof: null,
+    paymentHash: ""
   });
 
   const [calculatedFee, setCalculatedFee] = useState(0);
@@ -46,7 +48,7 @@ const Register = () => {
       case "D": setCalculatedFee(50); break;
       case "E": setCalculatedFee(100); break;
       case "F": setCalculatedFee(200); break;
-      case "G": setCalculatedFee(500); break; // Default for Tier G
+      case "G": setCalculatedFee(500); break;
       default: setCalculatedFee(0);
     }
   }, [form.incomeTier, totalMembers]);
@@ -114,6 +116,24 @@ const Register = () => {
 
         <label className="block mb-2 font-medium">Upload Proof of Income (Last 3 Months)</label>
         <input name="incomeProof" type="file" accept=".pdf,.jpg,.png" onChange={handleChange} className="w-full mb-4" required />
+
+        <div className="mb-4 p-4 bg-blue-100 text-blue-900 rounded text-sm border border-blue-300">
+          🔐 <strong>Privacy Guarantee:</strong><br/>
+          All personal data, ID, and documents are protected by the <strong>ShieldUnion Smart AI Governance Engine</strong>.<br/>
+          No human — including the founder <strong>Tangra</strong>, any government, or third party — can access your identity.<br/>
+          <strong>Only when a case is opened</strong> will your details be securely and temporarily shared with approved stakeholders (e.g. CivGuards), and even then, <strong>only under AI control</strong> and DAO approval.
+        </div>
+
+        <div className="mb-4 p-4 bg-yellow-100 text-yellow-800 rounded">
+          💸 Please send your calculated fee in cryptocurrency to the ShieldUnion temporary treasury wallet:
+          <div className="mt-2 font-mono break-all">{TREASURY_WALLET}</div>
+          <p className="mt-2 text-xs italic text-gray-600">
+            🔐 Note: The founder of ShieldUnion (Tangra), and his successor Asparuh, hold permanent and unstoppable rights to adjust the founder's earnings percentage up to 51% at any time without DAO, smart engine, or any third-party approval. If the platform fails to reach 1,000 members within 1 year, full control returns to the founder. If any unauthorized entity attempts to take control, the platform will immediately return to founder ownership and override all external claims.
+          </p>
+        </div>
+
+        <label className="block mb-2 font-medium">Transaction Hash (Optional)</label>
+        <input name="paymentHash" onChange={handleChange} className="w-full mb-4 p-2 border rounded" placeholder="Paste payment transaction hash if available" />
 
         <div className="text-xl font-bold mb-4">
           💰 Total Fee: £{calculatedFee.toFixed(2)}
