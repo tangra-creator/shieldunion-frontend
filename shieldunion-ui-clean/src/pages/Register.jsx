@@ -27,7 +27,7 @@ const Register = () => {
       else if (income <= 50000) setCalculatedFee(50);
       else if (income <= 100000) setCalculatedFee(100);
       else if (income <= 200000) setCalculatedFee(200);
-      else setCalculatedFee(500);
+      else setCalculatedFee(500); // Default for Gold Tier
     } else if (userType === "civguard") {
       const base = 50;
       const extra = form.groupSize > 1 ? (form.groupSize - 1) * 25 : 0;
@@ -106,7 +106,19 @@ const Register = () => {
               required
               className="w-full border px-3 py-2 rounded text-sm"
             />
-            <p className="text-xs text-gray-500 mt-1">Fee auto-calculated based on income.</p>
+
+            <div className="mt-3 text-sm text-gray-600">
+              <p className="font-semibold mb-2">💸 Monthly Fee Based on Income:</p>
+              <ul className="list-disc list-inside space-y-1 text-left text-xs">
+                <li>£0–10,000 → £6</li>
+                <li>£10,001–15,000 → £10</li>
+                <li>£15,001–25,000 → £20</li>
+                <li>£25,001–50,000 → £50</li>
+                <li>£50,001–100,000 → £100</li>
+                <li>£100,001–200,000 → £200</li>
+                <li>Over £200,000 → £500–£1500 (Gold Tier)</li>
+              </ul>
+            </div>
           </div>
         )}
 
@@ -123,7 +135,9 @@ const Register = () => {
                 required
                 className="w-full border px-3 py-2 rounded text-sm"
               />
-              <p className="text-xs text-gray-500 mt-1">Solo = £50 · +£25 per extra person</p>
+              <p className="text-xs text-gray-500 mt-1">
+                Solo = £50 · +£25 per additional member
+              </p>
             </div>
 
             <div>
