@@ -22,9 +22,9 @@ const CivGuardLayout = () => {
         <CivGuardNavbar />
 
         {/* 📄 Page Content */}
-        <div className="p-6">
+        <main className="p-6">
           <Outlet />
-        </div>
+        </main>
       </div>
 
       <Footer />

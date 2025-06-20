@@ -49,17 +49,19 @@ const CivGuardDashboard = () => {
   );
 };
 
+import React from "react";
+import Footer from "../components/Footer";
 
-import Footer from '../components/Footer'; // ✅ correct
-
-function App() {
+const PageName = () => {
   return (
-    <>
-      <Routes>{/* your routes */}</Routes>
-      <Footer />
-    </>
-  );
-}
+    <div className="min-h-screen flex flex-col justify-between">
+      <main className="flex-grow">
+        {/* your existing content here */}
+      </main>
 
+      <Footer />
+    </div>
+  );
+};
 
 export default CivGuardDashboard;

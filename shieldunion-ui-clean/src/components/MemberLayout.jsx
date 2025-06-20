@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import MemberNavbar from './MemberNavbar';
-import Footer from '../components/Footer'; // Correct path
+import Footer from '../components/Footer';
 
 const MemberLayout = () => {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-100">
       <div>
         <MemberNavbar />
+
         <div className="p-4 bg-white shadow-md">
           <Link
             to="/"
@@ -16,6 +17,7 @@ const MemberLayout = () => {
             ⬅️ Back to Home
           </Link>
         </div>
+
         <main className="p-6 max-w-5xl mx-auto">
           <Outlet />
         </main>
