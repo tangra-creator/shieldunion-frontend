@@ -21,7 +21,7 @@ const Register = () => {
   useEffect(() => {
     if (userType === "member") {
       const income = parseFloat(form.income);
-      if (!form.income) {
+      if (!income) {
         setCalculatedFee(0);
       } else if (income <= 10000) setCalculatedFee(6);
       else if (income <= 15000) setCalculatedFee(10);
@@ -29,13 +29,13 @@ const Register = () => {
       else if (income <= 50000) setCalculatedFee(50);
       else if (income <= 100000) setCalculatedFee(100);
       else if (income <= 200000) setCalculatedFee(200);
-      else setCalculatedFee(500); // Default Gold Tier
+      else setCalculatedFee(500);
     } else if (userType === "civguard") {
       if (!form.groupSize || form.groupSize < 1) {
         setCalculatedFee(0);
       } else {
         const base = 50;
-        const extra = form.groupSize > 1 ? (form.groupSize - 1) * 25 : 0;
+        const extra = (form.groupSize - 1) * 25;
         setCalculatedFee(base + extra);
       }
     }
@@ -102,30 +102,42 @@ const Register = () => {
         </div>
 
         {userType === "member" && (
-          <div>
-            <label className="block font-semibold mb-1">Your Annual Income (£)</label>
-            <input
-              type="number"
-              name="income"
-              value={form.income}
-              onChange={handleChange}
-              required
-              className="w-full border px-3 py-2 rounded text-sm"
-            />
-
-            <div className="mt-3 text-sm text-gray-600">
-              <p className="font-semibold mb-2">💸 Monthly Fee Based on Income:</p>
-              <ul className="list-disc list-inside space-y-1 text-left text-xs">
-                <li>£0–10,000 → £6</li>
-                <li>£10,001–15,000 → £10</li>
-                <li>£15,001–25,000 → £20</li>
-                <li>£25,001–50,000 → £50</li>
-                <li>£50,001–100,000 → £100</li>
-                <li>£100,001–200,000 → £200</li>
-                <li>Over £200,000 → £500–£1500 (Gold Tier)</li>
-              </ul>
+          <>
+            <div>
+              <label className="block font-semibold mb-1">Select Your Annual Income Range</label>
+              <select
+                name="income"
+                value={form.income}
+                onChange={handleChange}
+                required
+                className="w-full border px-3 py-2 rounded text-sm"
+              >
+                <option value="">-- Select Income Range --</option>
+                <option value="10000">£0–10,000 → £6</option>
+                <option value="15000">£10,001–15,000 → £10</option>
+                <option value="25000">£15,001–25,000 → £20</option>
+                <option value="50000">£25,001–50,000 → £50</option>
+                <option value="100000">£50,001–100,000 → £100</option>
+                <option value="200000">£100,001–200,000 → £200</option>
+                <option value="250000">Over £200,000 → £500 (Gold Tier)</option>
+              </select>
             </div>
-          </div>
+
+            <div className="mt-3">
+              <label className="block font-semibold mb-1">Upload Proof of Income</label>
+              <input
+                type="file"
+                name="documents"
+                onChange={handleChange}
+                accept=".pdf,.jpg,.jpeg,.png"
+                required
+                className="w-full text-sm"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Upload payslip, tax doc, or valid ID with income info
+              </p>
+            </div>
+          </>
         )}
 
         {userType === "civguard" && (
@@ -160,7 +172,7 @@ const Register = () => {
           </>
         )}
 
-        {/* Show fee only when needed */}
+        {/* 💰 Fee Display (Only for CivGuard) */}
         {userType === "civguard" && (
           <div className="mt-2 font-bold text-base">
             💰 Total Fee: £{isNaN(calculatedFee) || calculatedFee === 0 ? "0.00" : calculatedFee}
