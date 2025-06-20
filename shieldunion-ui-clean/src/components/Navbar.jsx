@@ -10,7 +10,8 @@ const Navbar = () => {
 
       <div className="flex flex-wrap gap-4 text-sm sm:text-base justify-center">
         <Link to="/">Home</Link>
-        <Link to="/register">Register</Link>
+        <Link to="/register/member">Join as Member</Link>
+        <Link to="/register/civguard">Apply as CivGuard</Link>
         <Link to="/submit-case">Submit</Link>
         <Link to="/dao">DAO</Link>
         <Link to="/dashboard">Dashboard</Link>
