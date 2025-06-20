@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Footer from "../components/Footer";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -11,6 +12,7 @@ const SubmitProposal = () => {
     urgency: "normal",
   });
   const [file, setFile] = useState(null);
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,82 +33,86 @@ const SubmitProposal = () => {
 
     try {
       await axios.post(`${API}/api/proposals`, data);
-      alert("✅ Proposal submitted!");
+      setMessage("✅ Proposal submitted!");
+      setFormData({ title: "", description: "", duration: 3, urgency: "normal" });
+      setFile(null);
     } catch (err) {
       console.error("Proposal submit failed:", err);
-      alert("❌ Failed to submit proposal.");
+      setMessage("❌ Failed to submit proposal.");
     }
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-4">📝 Submit DAO Proposal</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="title"
-          placeholder="Proposal Title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded"
-        />
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded"
-        />
-        <input
-          type="number"
-          name="duration"
-          value={formData.duration}
-          onChange={handleChange}
-          min={1}
-          className="w-full border p-2 rounded"
-        />
-        <select
-          name="urgency"
-          value={formData.urgency}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-        >
-          <option value="normal">Normal</option>
-          <option value="urgent">Urgent</option>
-          <option value="critical">Life-Risk</option>
-        </select>
-        <input
-          type="file"
-          onChange={handleFile}
-          className="w-full border p-2 rounded"
-        />
-        <button
-          type="submit"
-          className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
-        >
-          🚀 Submit Proposal
-        </button>
-      </form>
-    </div>
-  );
-};
-
-import React from "react";
-import Footer from "../components/Footer";
-
-const PageName = () => {
-  return (
     <div className="min-h-screen flex flex-col justify-between">
       <main className="flex-grow">
-        {/* your existing content here */}
+        <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
+          <h2 className="text-2xl font-bold mb-4 text-center">📝 Submit DAO Proposal</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              name="title"
+              placeholder="Proposal Title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded"
+            />
+            <textarea
+              name="description"
+              placeholder="Describe your proposal"
+              value={formData.description}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded"
+              rows={4}
+            />
+            <div>
+              <label className="block font-semibold mb-1">⏳ Vote Duration (days)</label>
+              <input
+                type="number"
+                name="duration"
+                value={formData.duration}
+                onChange={handleChange}
+                min={1}
+                required
+                className="w-full border p-2 rounded"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-1">🚨 Urgency Level</label>
+              <select
+                name="urgency"
+                value={formData.urgency}
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+              >
+                <option value="normal">Normal</option>
+                <option value="urgent">Urgent</option>
+                <option value="critical">Life-Risk (Tier 1)</option>
+              </select>
+            </div>
+            <div>
+              <label className="block font-semibold mb-1">📎 Attach Evidence (optional)</label>
+              <input
+                type="file"
+                onChange={handleFile}
+                className="w-full border p-2 rounded"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+            >
+              🚀 Submit Proposal
+            </button>
+          </form>
+          {message && <p className="mt-4 text-center font-semibold text-blue-600">{message}</p>}
+        </div>
       </main>
 
       <Footer />
     </div>
   );
 };
-
 
 export default SubmitProposal;

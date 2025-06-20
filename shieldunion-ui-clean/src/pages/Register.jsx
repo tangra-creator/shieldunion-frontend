@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Footer from "../components/Footer";
+
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const Register = () => {
   const location = useLocation();
@@ -30,7 +33,7 @@ const Register = () => {
       else if (income <= 50000) setCalculatedFee(50);
       else if (income <= 100000) setCalculatedFee(100);
       else if (income <= 200000) setCalculatedFee(200);
-      else setCalculatedFee(500);
+      else setCalculatedFee(500); // Gold Tier
     } else if (userType === "civguard") {
       if (!form.groupSize || form.groupSize < 1) {
         setCalculatedFee(0);
@@ -65,7 +68,7 @@ const Register = () => {
     formData.append("fee", calculatedFee);
 
     try {
-      await axios.post("http://localhost:5000/api/register", formData);
+      await axios.post(`${API}/api/register`, formData);
       setMessage("✅ Registration successful!");
     } catch (err) {
       console.error(err);
@@ -74,156 +77,144 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-md w-full mx-auto p-4 sm:p-6 mt-6 bg-white rounded-2xl shadow-lg">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-center">
-        {userType === "civguard" ? "🛡️ CivGuard Registration" : "🙋 Member Registration"}
-      </h2>
-
-      <form onSubmit={handleSubmit} className="space-y-4 text-sm">
-        <div>
-          <label className="block font-semibold mb-1">Full Name</label>
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            className="w-full border px-3 py-2 rounded text-sm"
-          />
-        </div>
-
-        <div>
-          <label className="block font-semibold mb-1">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-            className="w-full border px-3 py-2 rounded text-sm"
-          />
-        </div>
-
-        {userType === "member" && (
-          <>
-            <div>
-              <label className="block font-semibold mb-1">Select Your Annual Income Range</label>
-              <select
-                name="income"
-                value={form.income}
-                onChange={handleChange}
-                required
-                className="w-full border px-3 py-2 rounded text-sm"
-              >
-                <option value="">-- Select Income Range --</option>
-                <option value="10000">£0–10,000 → £6</option>
-                <option value="15000">£10,001–15,000 → £10</option>
-                <option value="25000">£15,001–25,000 → £20</option>
-                <option value="50000">£25,001–50,000 → £50</option>
-                <option value="100000">£50,001–100,000 → £100</option>
-                <option value="200000">£100,001–200,000 → £200</option>
-                <option value="250000">Over £200,000 → £500 (Gold Tier)</option>
-              </select>
-            </div>
-
-            <div className="mt-3">
-              <label className="block font-semibold mb-1">Upload Proof of Income</label>
-              <input
-                type="file"
-                name="documents"
-                onChange={handleChange}
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-                className="w-full text-sm"
-              />
-            </div>
-
-            <div className="mt-3">
-              <label className="block font-semibold mb-1">Upload ID Document</label>
-              <input
-                type="file"
-                name="idDocument"
-                onChange={handleChange}
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-                className="w-full text-sm"
-              />
-              <p className="text-xs text-gray-500 mt-1">
-                Required for AI identity trust — not visible to public
-              </p>
-            </div>
-          </>
-        )}
-
-        {userType === "civguard" && (
-          <>
-            <div>
-              <label className="block font-semibold mb-1">CivGuard Group Size</label>
-              <input
-                type="number"
-                name="groupSize"
-                min="1"
-                value={form.groupSize}
-                onChange={handleChange}
-                required
-                className="w-full border px-3 py-2 rounded text-sm"
-              />
-              <p className="text-xs text-gray-500 mt-1">
-                Solo = £50 · +£25 per additional member
-              </p>
-            </div>
-
-            <div>
-              <label className="block font-semibold mb-1">Upload ID / Certificate</label>
-              <input
-                type="file"
-                name="documents"
-                onChange={handleChange}
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-                className="w-full text-sm"
-              />
-            </div>
-          </>
-        )}
-
-        {userType === "civguard" && (
-          <div className="mt-2 font-bold text-base">
-            💰 Total Fee: £{isNaN(calculatedFee) || calculatedFee === 0 ? "0.00" : calculatedFee}
-          </div>
-        )}
-
-        <button
-          type="submit"
-          className="w-full mt-4 bg-black text-white py-2 rounded hover:bg-gray-800 text-sm"
-        >
-          Submit Registration
-        </button>
-      </form>
-
-      {message && (
-        <div className="mt-4 text-center font-semibold text-blue-600 text-sm">
-          {message}
-        </div>
-      )}
-    </div>
-  );
-};
-
-import React from "react";
-import Footer from "../components/Footer";
-
-const PageName = () => {
-  return (
     <div className="min-h-screen flex flex-col justify-between">
       <main className="flex-grow">
-        {/* your existing content here */}
+        <div className="max-w-md w-full mx-auto p-4 sm:p-6 mt-6 bg-white rounded-2xl shadow-lg">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-center">
+            {userType === "civguard" ? "🛡️ CivGuard Registration" : "🙋 Member Registration"}
+          </h2>
+
+          <form onSubmit={handleSubmit} className="space-y-4 text-sm">
+            <div>
+              <label className="block font-semibold mb-1">Full Name</label>
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="w-full border px-3 py-2 rounded"
+              />
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-1">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className="w-full border px-3 py-2 rounded"
+              />
+            </div>
+
+            {userType === "member" && (
+              <>
+                <div>
+                  <label className="block font-semibold mb-1">Select Your Annual Income Range</label>
+                  <select
+                    name="income"
+                    value={form.income}
+                    onChange={handleChange}
+                    required
+                    className="w-full border px-3 py-2 rounded"
+                  >
+                    <option value="">-- Select Income Range --</option>
+                    <option value="10000">£0–10,000 → £6</option>
+                    <option value="15000">£10,001–15,000 → £10</option>
+                    <option value="25000">£15,001–25,000 → £20</option>
+                    <option value="50000">£25,001–50,000 → £50</option>
+                    <option value="100000">£50,001–100,000 → £100</option>
+                    <option value="200000">£100,001–200,000 → £200</option>
+                    <option value="250000">Over £200,000 → £500 (Gold Tier)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block font-semibold mb-1">Upload Proof of Income</label>
+                  <input
+                    type="file"
+                    name="documents"
+                    onChange={handleChange}
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    required
+                    className="w-full text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-semibold mb-1">Upload ID Document</label>
+                  <input
+                    type="file"
+                    name="idDocument"
+                    onChange={handleChange}
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    required
+                    className="w-full text-sm"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Required for AI identity trust — not visible to public
+                  </p>
+                </div>
+              </>
+            )}
+
+            {userType === "civguard" && (
+              <>
+                <div>
+                  <label className="block font-semibold mb-1">CivGuard Group Size</label>
+                  <input
+                    type="number"
+                    name="groupSize"
+                    min="1"
+                    value={form.groupSize}
+                    onChange={handleChange}
+                    required
+                    className="w-full border px-3 py-2 rounded"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Solo = £50 · +£25 per additional member
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block font-semibold mb-1">Upload ID / Certificate</label>
+                  <input
+                    type="file"
+                    name="documents"
+                    onChange={handleChange}
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    required
+                    className="w-full text-sm"
+                  />
+                </div>
+
+                <div className="mt-2 font-bold text-base">
+                  💰 Total Fee: £{isNaN(calculatedFee) || calculatedFee === 0 ? "0.00" : calculatedFee}
+                </div>
+              </>
+            )}
+
+            <button
+              type="submit"
+              className="w-full mt-4 bg-black text-white py-2 rounded hover:bg-gray-800"
+            >
+              Submit Registration
+            </button>
+          </form>
+
+          {message && (
+            <div className="mt-4 text-center font-semibold text-blue-600 text-sm">
+              {message}
+            </div>
+          )}
+        </div>
       </main>
 
       <Footer />
     </div>
   );
 };
-
 
 export default Register;
