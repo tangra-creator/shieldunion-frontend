@@ -9,7 +9,8 @@ const Home = () => {
       </h1>
 
       <p className="text-lg max-w-2xl text-gray-700 mb-6">
-        ShieldUnion is the world’s first unstoppable global protection platform defending people from injustice, corruption, and danger.
+        ShieldUnion is the world’s first unstoppable global protection platform
+        defending people from injustice, corruption, and danger.
         <br />
         Anonymous reporting. DAO voting. CivGuard response.
       </p>
@@ -22,55 +23,38 @@ const Home = () => {
       </Link>
 
       <p className="text-sm text-gray-500 mt-3">
-        Already registered?{" "}
+        Already registered?{' '}
         <Link to="/login" className="underline text-blue-600">
           Login here
         </Link>
       </p>
 
-      {/* 🎥 ShieldUnion Platform Overview */}
+      {/* ✅ Synthesia Video Embed */}
       <div className="mt-12 w-full max-w-4xl">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">🎥 ShieldUnion: How It Works</h2>
-        <div className="aspect-w-16 aspect-h-9 mb-8">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          🎥 ShieldUnion: Unstoppable Global Protection
+        </h2>
+        <div
+          className="aspect-w-16 aspect-h-9 mb-8"
+          style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16 / 9' }}
+        >
           <iframe
-            className="w-full h-64 md:h-96 rounded shadow"
-            src="https://www.youtube.com/embed/Hyh3h_yIDf0"
-            title="What is a DAO?"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            src="https://share.synthesia.io/embeds/videos/4aebfec9-3b43-4ae2-9945-a31736f0f550"
+            loading="lazy"
+            title="ShieldUnion video player"
             allowFullScreen
-          ></iframe>
-        </div>
-
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">🛡️ CivGuard: Verified Protectors</h2>
-        <div className="aspect-w-16 aspect-h-9 mb-8">
-          <iframe
-            className="w-full h-64 md:h-96 rounded shadow"
-            src="https://www.youtube.com/embed/Ropj9L9ULmU"
-            title="Privacy Tools for Activists"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
-
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">💸 Full Protection for £6</h2>
-        <div className="aspect-w-16 aspect-h-9 mb-8">
-          <iframe
-            className="w-full h-64 md:h-96 rounded shadow"
-            src="https://www.youtube.com/embed/H7aXzZsj5vI"
-            title="Human Rights & Tech"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
-
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">🌍 InfoTrade: Sell Truth. Buy Justice.</h2>
-        <div className="aspect-w-16 aspect-h-9">
-          <iframe
-            className="w-full h-64 md:h-96 rounded shadow"
-            src="https://www.youtube.com/embed/2rCyK1mK8fs"
-            title="Decentralized Justice"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+            allow="encrypted-media; fullscreen;"
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              top: 0,
+              left: 0,
+              border: 'none',
+              padding: 0,
+              margin: 0,
+              overflow: 'hidden',
+            }}
           ></iframe>
         </div>
       </div>
