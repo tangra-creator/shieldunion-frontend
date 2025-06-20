@@ -12,10 +12,13 @@ const Register = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    wallet: "",
     income: "",
     groupSize: 1,
     documents: null,
     idDocument: null,
+    licenseDocument: null, // For CivGuard certification/license
+    companyName: "", // For CivGuard
   });
 
   const [calculatedFee, setCalculatedFee] = useState(0);
@@ -70,6 +73,8 @@ const Register = () => {
       setForm({ ...form, documents: files[0] });
     } else if (name === "idDocument") {
       setForm({ ...form, idDocument: files[0] });
+    } else if (name === "licenseDocument") {
+      setForm({ ...form, licenseDocument: files[0] });
     } else {
       setForm({ ...form, [name]: value });
     }
@@ -115,13 +120,163 @@ const Register = () => {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4 text-sm">
-        {/* form inputs */}
-        {/* ... */}
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-semibold" htmlFor="name">
+            Full Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            value={form.name}
+            onChange={handleChange}
+            required
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-semibold" htmlFor="email">
+            Email Address
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Wallet */}
+        <div>
+          <label className="block text-sm font-semibold" htmlFor="wallet">
+            Wallet Address (Optional)
+          </label>
+          <input
+            id="wallet"
+            name="wallet"
+            type="text"
+            value={form.wallet}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Income for Members */}
+        {userType === "member" && (
+          <div>
+            <label className="block text-sm font-semibold" htmlFor="income">
+              Monthly Income (Last 3 Months)
+            </label>
+            <input
+              id="income"
+              name="income"
+              type="number"
+              value={form.income}
+              onChange={handleChange}
+              required
+              className="w-full p-2 border rounded"
+            />
+          </div>
+        )}
+
+        {/* Group Size for CivGuard */}
+        {userType === "civguard" && (
+          <div>
+            <label className="block text-sm font-semibold" htmlFor="groupSize">
+              Group Size (Number of Members in Your Team)
+            </label>
+            <input
+              id="groupSize"
+              name="groupSize"
+              type="number"
+              value={form.groupSize}
+              onChange={handleChange}
+              required
+              min="1"
+              className="w-full p-2 border rounded"
+            />
+          </div>
+        )}
+
+        {/* Document Upload */}
+        <div>
+          <label className="block text-sm font-semibold" htmlFor="idDocument">
+            Upload ID Document (Required)
+          </label>
+          <input
+            id="idDocument"
+            name="idDocument"
+            type="file"
+            onChange={handleChange}
+            required
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Additional Uploads */}
+        {userType === "member" && (
+          <div>
+            <label className="block text-sm font-semibold" htmlFor="documents">
+              Upload Proof of Income (Last 3 Months)
+            </label>
+            <input
+              id="documents"
+              name="documents"
+              type="file"
+              onChange={handleChange}
+              required
+              className="w-full p-2 border rounded"
+            />
+          </div>
+        )}
+
+        {userType === "civguard" && (
+          <div>
+            <label className="block text-sm font-semibold" htmlFor="licenseDocument">
+              Upload License or Certification
+            </label>
+            <input
+              id="licenseDocument"
+              name="licenseDocument"
+              type="file"
+              onChange={handleChange}
+              required
+              className="w-full p-2 border rounded"
+            />
+          </div>
+        )}
+
+        {/* Company/Name for CivGuard */}
+        {userType === "civguard" && (
+          <div>
+            <label className="block text-sm font-semibold" htmlFor="companyName">
+              Company or Personal Name
+            </label>
+            <input
+              id="companyName"
+              name="companyName"
+              type="text"
+              value={form.companyName}
+              onChange={handleChange}
+              required
+              className="w-full p-2 border rounded"
+            />
+          </div>
+        )}
+
+        {/* Fee Display */}
         <div className="mt-2 font-bold text-base">
           💰 Total Fee: £
           {calculatedFee === 0 ? "0.00" : calculatedFee.toFixed(2)}
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full mt-4 bg-black text-white py-2 rounded hover:bg-gray-800 text-sm"
@@ -130,6 +285,7 @@ const Register = () => {
         </button>
       </form>
 
+      {/* Registration Message */}
       {message && (
         <div className="mt-4 text-center font-semibold text-blue-600 text-sm">
           {message}
