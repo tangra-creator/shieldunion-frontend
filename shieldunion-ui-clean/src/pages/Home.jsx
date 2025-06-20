@@ -5,27 +5,31 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center px-4">
       <div className="max-w-4xl text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          🛡️ Welcome to ShieldUnion
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 flex items-center justify-center gap-2">
+          <span>🛡️</span> Welcome to <span className="text-black">ShieldUnion</span>
         </h1>
+
         <p className="text-lg md:text-xl text-gray-700 mb-8">
           The unstoppable global protection system powered by AI, DAO, and family legacy.
         </p>
 
-        {/* ✅ YOUR VIDEO */}
+        {/* ✅ Your YouTube Video Embed */}
         <div className="mb-10 w-full">
-          <div className="aspect-w-16 aspect-h-9 w-full rounded-lg overflow-hidden">
+          <div className="rounded-lg overflow-hidden shadow-lg">
             <iframe
-              src="https://share.synthesia.io/embeds/videos/4aebfec9-3b43-4ae2-9945-a31736f0f550"
-              title="ShieldUnion Intro Video"
-              loading="lazy"
+              width="100%"
+              height="400"
+              src="https://www.youtube.com/embed/Xv-QWQHfXY8"
+              title="ShieldUnion Introduction"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              className="w-full h-96 rounded"
+              className="w-full h-[400px]"
             ></iframe>
           </div>
         </div>
 
-        {/* ✅ TWO JOIN OPTIONS */}
+        {/* ✅ Two Join Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
             to="/register?type=member"
