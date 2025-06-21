@@ -125,20 +125,19 @@ const RegisterMember = () => {
         </div>
 
         <div className="mb-4 p-4 bg-yellow-100 text-yellow-800 rounded">
-          💸 {t("paymentInstructions")}
-          <div className="mt-2 font-mono break-all">{TREASURY_WALLET}</div>
+          💸 <strong>{t("paymentInstructions")}</strong><br/>
+          {t("secureTreasuryInfo")}
           <p className="mt-2 text-xs italic text-gray-600">
             🛡️ {t("founderRightsNotice")}
           </p>
         </div>
 
         <label className="block mb-2 font-medium">{t("transactionHash")}</label>
-        <input name="paymentHash" onChange={handleChange} className="w-full mb-4 p-2 border rounded" placeholder={t("transactionPlaceholder")} />
+        <input name="paymentHash" onChange={handleChange} className="w-full mb-4 p-2 border rounded" placeholder={t("transactionPlaceholder")}/>
 
         <div className="text-xl font-bold mb-4">
-  💰       {t("totalFee")}: £{calculatedFee.toFixed(2)}
+          💰 {t("totalFee")}: £{calculatedFee.toFixed(2)}
         </div>
-
 
         <button className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800">
           {t("submitRegistration")}

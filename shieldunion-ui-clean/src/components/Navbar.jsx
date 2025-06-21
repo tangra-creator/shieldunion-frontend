@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LanguageSelector from './LanguageSelector';
 
 const Navbar = () => {
   return (
@@ -20,6 +21,10 @@ const Navbar = () => {
         <Link to="/about">About</Link>
         <Link to="/public-vault">Public Vault</Link>
         <Link to="/vault">Classified Vault</Link>
+      </div>
+
+      <div className="mt-4 sm:mt-0">
+        <LanguageSelector />
       </div>
     </nav>
   );
