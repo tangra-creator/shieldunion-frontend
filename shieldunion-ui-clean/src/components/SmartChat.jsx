@@ -23,22 +23,19 @@ const SmartChat = ({ caseId = "case-general" }) => {
 
   // Send message handler
   const handleSend = async () => {
-    if (!input.trim()) return;
-    const newMsg = { sender: "user", message: input };
+  if (!input.trim()) return;
+  const newMsg = { sender, message: input };
 
-    try {
-      // Update UI immediately for responsiveness
-      setMessages((prev) => [...prev, { ...newMsg, time: Date.now() }]);
+  try {
+    const response = await axios.post(`${API}/api/chat/send`, payload);
+    console.log("Response from backend:", response.data); // Add this line
+    setMessages((prev) => [...prev, { ...newMsg, time: Date.now() }]);
+    setInput("");
+  } catch (err) {
+    console.error("❌ Failed to send message:", err);
+  }
+};
 
-      // Send to backend
-      await axios.post(`${API}/api/chat/send`, { caseId, ...newMsg });
-
-      setInput("");
-    } catch (err) {
-      console.error("❌ Failed to send message:", err);
-      // Optionally rollback UI update or notify user here
-    }
-  };
 
   return (
     <div className="w-full max-w-md p-4 bg-white rounded shadow">
