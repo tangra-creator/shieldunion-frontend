@@ -67,13 +67,13 @@ const Home = () => {
 
         <div className="flex gap-4 mb-3">
           <Link
-            to="/register?type=member"
+            to="/register/member"
             className="bg-black text-white px-5 py-2 rounded hover:bg-gray-800"
           >
             Join as Member
           </Link>
           <Link
-            to="/register?type=civguard"
+            to="/register/civguard"
             className="bg-gray-200 px-5 py-2 rounded hover:bg-gray-300"
           >
             Join as CivGuard
@@ -86,13 +86,13 @@ const Home = () => {
 
         <button
           onClick={() => setShowChat(!showChat)}
-          className="bg-blue-600 text-white px-4 py-2 rounded mb-8 hover:bg-blue-700"
+          className="bg-blue-600 text-white px-4 py-2 rounded mb-6 hover:bg-blue-700"
         >
           💬 Open ShieldUnion AI Chat
         </button>
 
         {showChat && (
-          <div className="w-full max-w-md">
+          <div className="w-full max-w-xl mb-8">
             <SmartChat />
           </div>
         )}
