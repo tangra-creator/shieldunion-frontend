@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
 import SmartChat from "../components/SmartChat";
+import LanguageSelector from "../components/LanguageSelector"; // optional but enhances UX
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -34,10 +35,15 @@ const MyProtection = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+      <SmartChat />
+
       <main className="flex-grow">
         <div className="max-w-xl mx-auto p-6 bg-white shadow rounded mt-8">
-          <h2 className="text-2xl font-bold mb-4">🛡️ My Protection</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold">🛡️ My Protection</h2>
+            <LanguageSelector />
+          </div>
 
           <textarea
             placeholder="Why do you need protection?"
@@ -67,14 +73,20 @@ const MyProtection = () => {
             </div>
           )}
 
-          {/* ✅ Insert Smart Chat Section Below */}
           <div className="mt-10">
             <SmartChat caseId="CASE-2091" sender="member" />
           </div>
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        links={[
+          { name: "Privacy Policy", to: "/privacy" },
+          { name: "Terms of Use", to: "/terms" },
+          { name: "About", to: "/about" }
+        ]}
+        note="ShieldUnion is fully AI-governed. No human, including the founder, can view or modify your data."
+      />
     </div>
   );
 };

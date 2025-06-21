@@ -1,22 +1,32 @@
-// src/pages/Contact.jsx
-import React, { useState } from "react";
-import Footer from "../components/Footer";
+import React, { useState } from 'react';
+import axios from 'axios';
+import Footer from '../components/Footer';
+import LanguageSelector from '../components/LanguageSelector';
+import SmartChat from '../components/SmartChat';
+
+const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 const Contact = () => {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState("");
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus("✅ Message sent successfully!");
-    setEmail("");
-    setMessage("");
+    setStatus('✅ Message sent successfully!');
+    setEmail('');
+    setMessage('');
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-100">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-100 relative">
+      <SmartChat />
+
       <main className="flex-grow max-w-lg mx-auto mt-10 p-6 bg-white rounded shadow">
+        <div className="flex justify-end mb-2">
+          <LanguageSelector />
+        </div>
+
         <h2 className="text-2xl font-bold mb-6 text-center">📬 Contact Us</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input

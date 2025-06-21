@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
+import LanguageSelector from "../components/LanguageSelector";
+import SmartChat from "../components/SmartChat";
 
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
@@ -32,8 +34,14 @@ const CivGuardVerify = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <SmartChat />
+
       <main className="max-w-6xl mx-auto mt-8 p-4">
+        <div className="flex justify-end mb-2">
+          <LanguageSelector />
+        </div>
+
         <h2 className="text-3xl font-bold mb-6 text-center">
           🕵️ CivGuard Applications (Review Panel)
         </h2>
@@ -53,8 +61,7 @@ const CivGuardVerify = () => {
                 <p>🌍 Service Level: {app.serviceLevel}</p>
                 <p>💷 Paid: £{app.paid}</p>
                 <p>
-                  📌 Status:{" "}
-                  <span className="font-semibold">{app.status}</span>
+                  📌 Status: <span className="font-semibold">{app.status}</span>
                 </p>
 
                 {app.document && (

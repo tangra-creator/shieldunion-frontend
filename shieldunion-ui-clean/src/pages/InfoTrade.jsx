@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Footer from '../components/Footer';
+import LanguageSelector from '../components/LanguageSelector';
+import SmartChat from '../components/SmartChat';
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -31,9 +33,14 @@ const InfoTrade = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <SmartChat />
+
       <main className="flex-grow">
         <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded shadow">
+          <div className="flex justify-end mb-2">
+            <LanguageSelector />
+          </div>
           <h2 className="text-3xl font-bold mb-6 text-center">🧠 InfoTrade Exchange</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input

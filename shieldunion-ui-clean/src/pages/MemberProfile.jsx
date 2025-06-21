@@ -41,7 +41,7 @@ const MemberProfile = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
       <main className="flex-grow">
         <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
           <h2 className="text-3xl font-bold mb-6 text-center">🙍 Member Profile</h2>

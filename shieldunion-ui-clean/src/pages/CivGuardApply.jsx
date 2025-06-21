@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
+import LanguageSelector from "../components/LanguageSelector";
+import SmartChat from "../components/SmartChat";
 
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
@@ -83,8 +85,14 @@ const CivGuardApply = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-100">
+    <div className="min-h-screen flex flex-col justify-between relative bg-gray-100">
+      <SmartChat />
+
       <main className="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
+        <div className="flex justify-end mb-4">
+          <LanguageSelector />
+        </div>
+
         <h2 className="text-2xl font-bold mb-4">🛡️ Apply to Become a CivGuard</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">

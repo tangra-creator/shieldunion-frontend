@@ -17,7 +17,6 @@ import Join from './pages/Join';
 
 // Layouts (Members)
 import MemberLayout from "./components/MemberLayout";
-import MemberPortal from "./pages/MemberPortal";
 import MemberProfile from "./pages/MemberProfile";
 import MyCases from "./pages/MyCases";
 import MyProtection from "./pages/MyProtection";
@@ -58,7 +57,7 @@ function App() {
 
         {/* 🔐 Member Area */}
         <Route path="/member" element={<MemberLayout />}>
-          <Route index element={<MemberPortal />} />
+          {/* Removed MemberPortal */}
           <Route path="profile" element={<MemberProfile />} />
           <Route path="my-cases" element={<MyCases />} />
           <Route path="my-protection" element={<MyProtection />} />

@@ -1,10 +1,18 @@
 import React from "react";
 import Footer from "../components/Footer";
+import LanguageSelector from "../components/LanguageSelector";
+import SmartChat from "../components/SmartChat";
 
 const AboutPlatform = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-100">
+    <div className="min-h-screen flex flex-col justify-between relative bg-gray-100">
+      <SmartChat />
+
       <main className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded shadow">
+        <div className="flex justify-end mb-4">
+          <LanguageSelector />
+        </div>
+
         <h2 className="text-3xl font-bold mb-4">⚙️ About the Platform</h2>
         <p className="mb-4">
           ShieldUnion is a decentralized protection ecosystem powered by AI automation, DAO governance, and anonymous infrastructure.

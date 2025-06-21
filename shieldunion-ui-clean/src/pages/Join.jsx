@@ -1,12 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import LanguageSelector from "../components/LanguageSelector";
+import SmartChat from "../components/SmartChat";
 
 const Join = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <SmartChat />
+
       <main className="flex-grow">
         <div className="max-w-3xl mx-auto mt-12 p-6 bg-white rounded shadow">
+          <div className="flex justify-end mb-2">
+            <LanguageSelector />
+          </div>
           <h2 className="text-3xl font-bold mb-6 text-center">🛡️ Join ShieldUnion</h2>
 
           <p className="text-center text-gray-700 mb-8">

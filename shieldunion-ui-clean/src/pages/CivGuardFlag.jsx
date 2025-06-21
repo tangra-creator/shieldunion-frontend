@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Footer from '../components/Footer';
+import LanguageSelector from '../components/LanguageSelector';
+import SmartChat from '../components/SmartChat';
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -30,8 +32,14 @@ const CivGuardFlag = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <SmartChat />
+
       <main className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow">
+        <div className="flex justify-end mb-2">
+          <LanguageSelector />
+        </div>
+
         <h2 className="text-2xl font-bold mb-6 text-center text-red-700">
           🚨 Flag a High-Risk Case
         </h2>

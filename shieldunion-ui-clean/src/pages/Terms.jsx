@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 
 const Terms = () => {
+  const [language, setLanguage] = useState("English");
+
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+      {/* 🌐 Language Selector */}
+      <div className="text-right px-6 pt-4 text-sm text-gray-600">
+        🌐 Language:
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+          className="ml-2 px-2 py-1 border rounded"
+        >
+          <option>English</option>
+          <option>Español</option>
+          <option>Français</option>
+          <option>العربية</option>
+          <option>Türkçe</option>
+          <option>Български</option>
+        </select>
+      </div>
+
       <main className="flex-grow">
-        <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded shadow">
+        <div className="max-w-3xl mx-auto mt-6 p-6 bg-white rounded shadow">
           <h2 className="text-3xl font-bold mb-4">📜 Terms & Conditions</h2>
 
           <p className="mb-4">

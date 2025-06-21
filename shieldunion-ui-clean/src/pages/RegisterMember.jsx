@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import Footer from "../components/Footer";
 
 const PROMO_THRESHOLD = 1500;
-const TREASURY_WALLET = "0xB22f3f35Dcb16a1C2D7748a53D4e7c3f8143E043"; // Visible only to Smart Engine
+const TREASURY_WALLET = "0xB22f3f35Dcb16a1C2D7748a53D4e7c3f8143E043";
 
 const RegisterMember = () => {
   const { t } = useTranslation();
@@ -24,6 +25,7 @@ const RegisterMember = () => {
 
   const [calculatedFee, setCalculatedFee] = useState(0);
   const [totalMembers, setTotalMembers] = useState(0);
+  const [language, setLanguage] = useState("English");
 
   useEffect(() => {
     const fetchTotalMembers = async () => {
@@ -34,7 +36,6 @@ const RegisterMember = () => {
         console.error("Failed to fetch member count:", err);
       }
     };
-
     fetchTotalMembers();
   }, []);
 
@@ -83,66 +84,89 @@ const RegisterMember = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold text-center mb-4">{t("memberRegistration")}</h2>
-
-      <div className="bg-green-100 text-green-800 text-sm p-3 rounded mb-4">
-        🗓️ {t("earlyAdopterPromo")} <strong>{t("freeOfCharge")}</strong><br/>
-        {t("afterThresholdFees")}
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+      {/* 🌐 Language Control */}
+      <div className="text-right px-6 pt-4 text-sm text-gray-600">
+        🌐 Language:
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+          className="ml-2 px-2 py-1 border rounded"
+        >
+          <option>English</option>
+          <option>Español</option>
+          <option>Français</option>
+          <option>العربية</option>
+          <option>Türkçe</option>
+          <option>Български</option>
+        </select>
       </div>
 
-      <form onSubmit={handleSubmit}>
-        <label className="block mb-2 font-medium">{t("fullName")}</label>
-        <input name="name" onChange={handleChange} className="w-full mb-4 p-2 border rounded" required />
+      <main className="flex-grow">
+        <div className="max-w-xl mx-auto mt-6 p-6 bg-white rounded shadow">
+          <h2 className="text-2xl font-bold text-center mb-6">{t("memberRegistration")}</h2>
 
-        <label className="block mb-2 font-medium">{t("emailAddress")}</label>
-        <input name="email" type="email" onChange={handleChange} className="w-full mb-4 p-2 border rounded" required />
+          <div className="bg-green-100 text-green-800 text-sm p-3 rounded mb-4">
+            🗓️ {t("earlyAdopterPromo")} <strong>{t("freeOfCharge")}</strong><br />
+            {t("afterThresholdFees")}
+          </div>
 
-        <label className="block mb-2 font-medium">{t("walletAddressOptional")}</label>
-        <input name="wallet" onChange={handleChange} className="w-full mb-4 p-2 border rounded" />
+          <form onSubmit={handleSubmit}>
+            <label className="block mb-2 font-medium">{t("fullName")}</label>
+            <input name="name" onChange={handleChange} className="w-full mb-4 p-2 border rounded" required />
 
-        <label className="block mb-2 font-medium">{t("incomeLevel")}</label>
-        <select name="incomeTier" onChange={handleChange} required className="w-full mb-4 p-2 border rounded">
-          <option value="">-- {t("selectTier")} --</option>
-          <option value="A">{t("tierA")}</option>
-          <option value="B">{t("tierB")}</option>
-          <option value="C">{t("tierC")}</option>
-          <option value="D">{t("tierD")}</option>
-          <option value="E">{t("tierE")}</option>
-          <option value="F">{t("tierF")}</option>
-          <option value="G">{t("tierG")}</option>
-        </select>
+            <label className="block mb-2 font-medium">{t("emailAddress")}</label>
+            <input name="email" type="email" onChange={handleChange} className="w-full mb-4 p-2 border rounded" required />
 
-        <label className="block mb-2 font-medium">{t("uploadID")}</label>
-        <input name="idDocument" type="file" accept=".pdf,.jpg,.png" onChange={handleChange} className="w-full mb-4" required />
+            <label className="block mb-2 font-medium">{t("walletAddressOptional")}</label>
+            <input name="wallet" onChange={handleChange} className="w-full mb-4 p-2 border rounded" />
 
-        <label className="block mb-2 font-medium">{t("uploadIncomeProof")}</label>
-        <input name="incomeProof" type="file" accept=".pdf,.jpg,.png" onChange={handleChange} className="w-full mb-4" required />
+            <label className="block mb-2 font-medium">{t("incomeLevel")}</label>
+            <select name="incomeTier" onChange={handleChange} required className="w-full mb-4 p-2 border rounded">
+              <option value="">-- {t("selectTier")} --</option>
+              <option value="A">{t("tierA")}</option>
+              <option value="B">{t("tierB")}</option>
+              <option value="C">{t("tierC")}</option>
+              <option value="D">{t("tierD")}</option>
+              <option value="E">{t("tierE")}</option>
+              <option value="F">{t("tierF")}</option>
+              <option value="G">{t("tierG")}</option>
+            </select>
 
-        <div className="mb-4 p-4 bg-blue-50 text-blue-800 rounded">
-          🔐 <strong>{t("privacyGuaranteeTitle")}</strong><br/>
-          {t("privacyGuaranteeText")}
+            <label className="block mb-2 font-medium">{t("uploadID")}</label>
+            <input name="idDocument" type="file" accept=".pdf,.jpg,.png" onChange={handleChange} className="w-full mb-4" required />
+
+            <label className="block mb-2 font-medium">{t("uploadIncomeProof")}</label>
+            <input name="incomeProof" type="file" accept=".pdf,.jpg,.png" onChange={handleChange} className="w-full mb-4" required />
+
+            <div className="mb-4 p-4 bg-blue-50 text-blue-800 rounded text-sm">
+              🔐 <strong>{t("privacyGuaranteeTitle")}</strong><br />
+              {t("privacyGuaranteeText")}
+            </div>
+
+            <div className="mb-4 p-4 bg-yellow-100 text-yellow-800 rounded text-sm">
+              💸 <strong>{t("paymentInstructions")}</strong><br />
+              {t("secureTreasuryInfo")}
+              <p className="mt-2 text-xs italic text-gray-600">
+                🛡️ {t("founderRightsNotice")}
+              </p>
+            </div>
+
+            <label className="block mb-2 font-medium">{t("transactionHash")}</label>
+            <input name="paymentHash" onChange={handleChange} className="w-full mb-4 p-2 border rounded" placeholder={t("transactionPlaceholder")} />
+
+            <div className="text-xl font-bold mb-4">
+              💰 {t("totalFee")}: £{calculatedFee.toFixed(2)}
+            </div>
+
+            <button className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800">
+              {t("submitRegistration")}
+            </button>
+          </form>
         </div>
+      </main>
 
-        <div className="mb-4 p-4 bg-yellow-100 text-yellow-800 rounded">
-          💸 <strong>{t("paymentInstructions")}</strong><br/>
-          {t("secureTreasuryInfo")}
-          <p className="mt-2 text-xs italic text-gray-600">
-            🛡️ {t("founderRightsNotice")}
-          </p>
-        </div>
-
-        <label className="block mb-2 font-medium">{t("transactionHash")}</label>
-        <input name="paymentHash" onChange={handleChange} className="w-full mb-4 p-2 border rounded" placeholder={t("transactionPlaceholder")}/>
-
-        <div className="text-xl font-bold mb-4">
-          💰 {t("totalFee")}: £{calculatedFee.toFixed(2)}
-        </div>
-
-        <button className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800">
-          {t("submitRegistration")}
-        </button>
-      </form>
+      <Footer />
     </div>
   );
 };

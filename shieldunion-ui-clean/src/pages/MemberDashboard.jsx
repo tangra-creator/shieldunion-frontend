@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import LanguageSelector from '../components/LanguageSelector';
+import SmartChat from '../components/SmartChat';
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -33,9 +35,14 @@ const MemberDashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <SmartChat />
+
       <main className="flex-grow">
         <div className="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-xl shadow">
+          <div className="flex justify-end mb-2">
+            <LanguageSelector />
+          </div>
           <h2 className="text-3xl font-bold mb-2 text-center">🛡️ Member Dashboard</h2>
           <p className="text-center text-gray-700 mb-2">
             Welcome, <strong>{alias}</strong>
@@ -56,6 +63,12 @@ const MemberDashboard = () => {
             </Link>
             <Link to="/classified-vault" className="bg-purple-700 text-white p-4 rounded text-center hover:bg-purple-800">
               🔒 View Classified Vault
+            </Link>
+            <Link to="/info-trade" className="bg-black text-white p-4 rounded text-center hover:bg-gray-800">
+              📤 Information Trade
+            </Link>
+            <Link to="/my-protection" className="bg-purple-700 text-white p-4 rounded text-center hover:bg-purple-800 transition">
+              🧠 Chat with CivGuard
             </Link>
           </div>
 

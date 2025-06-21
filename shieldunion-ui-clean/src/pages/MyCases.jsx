@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
+import SmartChat from "../components/SmartChat";
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 const MyCases = () => {
   const [cases, setCases] = useState([]);
+  const [alias, setAlias] = useState('');
 
   useEffect(() => {
+    const storedAlias = localStorage.getItem('alias') || 'anonymous-user';
+    setAlias(storedAlias);
+
     const fetchCases = async () => {
       try {
-        const res = await axios.get(`${API}/api/cases`);
+        const res = await axios.get(`${API}/api/cases/member/${storedAlias}`);
         setCases(res.data || []);
       } catch (error) {
         console.error("Failed to fetch cases:", error);
@@ -21,12 +26,14 @@ const MyCases = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+      <SmartChat />
+
       <main className="flex-grow">
         <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded shadow">
           <h2 className="text-2xl font-bold mb-4">📂 My Submitted Cases</h2>
           {cases.length === 0 ? (
-            <p>No cases submitted yet.</p>
+            <p className="text-center text-gray-500">No cases submitted yet.</p>
           ) : (
             <ul className="space-y-4">
               {cases.map((c, idx) => (

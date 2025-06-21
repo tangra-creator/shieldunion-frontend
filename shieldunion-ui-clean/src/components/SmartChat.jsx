@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Footer from '../components/Footer';
+import LanguageSelector from './LanguageSelector';
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
-const SmartChat = ({ caseId, sender }) => {
+const SmartChat = ({ caseId = 'General', sender = 'anonymous' }) => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,7 @@ const SmartChat = ({ caseId, sender }) => {
       const res = await axios.get(`${API}/api/chat/${caseId}`);
       setMessages(res.data);
     } catch (err) {
-      console.error('Failed to load messages:', err);
+      console.error('❌ Failed to load messages:', err);
     } finally {
       setLoading(false);
     }
@@ -23,19 +24,17 @@ const SmartChat = ({ caseId, sender }) => {
 
   useEffect(() => {
     fetchMessages();
-    const interval = setInterval(fetchMessages, 4000); // Poll every 4s
+    const interval = setInterval(fetchMessages, 4000);
     return () => clearInterval(interval);
   }, [caseId]);
 
-  // Auto-scroll to bottom
   useEffect(() => {
-    const chatContainer = document.getElementById('chat-container');
-    if (chatContainer) {
-      chatContainer.scrollTop = chatContainer.scrollHeight;
+    const container = document.getElementById('chat-container');
+    if (container) {
+      container.scrollTop = container.scrollHeight;
     }
   }, [messages]);
 
-  // Send message
   const sendMessage = async () => {
     if (!messageInput.trim()) return;
 
@@ -48,64 +47,73 @@ const SmartChat = ({ caseId, sender }) => {
       setMessageInput('');
       fetchMessages();
     } catch (err) {
-      console.error('Send failed:', err);
+      console.error('❌ Failed to send message:', err);
     }
   };
 
-  // Send with Enter key
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') sendMessage();
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between p-4">
-      <main className="flex-grow border rounded bg-white shadow p-4">
-        <h3 className="text-lg font-semibold mb-2">🧠 Smart Chat — Case {caseId}</h3>
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+      <main className="flex-grow">
+        <div className="max-w-3xl mx-auto mt-6 p-6 bg-white shadow rounded">
+          <div className="flex justify-between items-center mb-3">
+            <h2 className="text-xl font-semibold text-gray-800">🧠 Smart Chat — Case {caseId}</h2>
+            <LanguageSelector />
+          </div>
 
-        <div
-          id="chat-container"
-          className="max-h-64 overflow-y-auto space-y-2 border p-2 rounded bg-gray-50 mb-3"
-        >
-          {loading ? (
-            <div className="flex items-center justify-center text-gray-500 text-sm animate-pulse">
-              Loading conversation...
-            </div>
-          ) : messages.length === 0 ? (
-            <p className="text-gray-400 text-sm">No messages yet.</p>
-          ) : (
-            messages.map((msg, index) => (
-              <div key={index} className="text-sm">
-                <span className="font-semibold text-gray-800">
-                  {msg.sender === sender ? '🧍 You' : '👥 ' + msg.sender}:
-                </span>{' '}
-                {msg.message}
-                <span className="text-gray-400 text-xs block">
-                  {new Date(msg.timestamp).toLocaleString()}
-                </span>
-              </div>
-            ))
-          )}
-        </div>
-
-        <div className="flex gap-2">
-          <input
-            type="text"
-            className="flex-1 border px-3 py-2 rounded"
-            placeholder="Type your message..."
-            value={messageInput}
-            onChange={(e) => setMessageInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <button
-            className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
-            onClick={sendMessage}
+          <div
+            id="chat-container"
+            className="h-64 overflow-y-auto border rounded bg-gray-100 p-3 space-y-2"
           >
-            Send
-          </button>
+            {loading ? (
+              <p className="text-center text-gray-500 text-sm animate-pulse">Loading conversation...</p>
+            ) : messages.length === 0 ? (
+              <p className="text-center text-gray-400 text-sm">No messages yet.</p>
+            ) : (
+              messages.map((msg, i) => (
+                <div key={i} className="text-sm">
+                  <strong className={msg.sender === sender ? 'text-blue-600' : 'text-gray-800'}>
+                    {msg.sender === sender ? '🧍 You' : '👥 ' + msg.sender}:
+                  </strong>{' '}
+                  {msg.message}
+                  <div className="text-xs text-gray-400">
+                    {new Date(msg.timestamp).toLocaleString()}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className="mt-4 flex gap-2">
+            <input
+              type="text"
+              className="flex-1 border px-3 py-2 rounded"
+              placeholder="Type your message..."
+              value={messageInput}
+              onChange={(e) => setMessageInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <button
+              onClick={sendMessage}
+              className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
+            >
+              Send
+            </button>
+          </div>
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        links={[
+          { name: 'Privacy Policy', to: '/privacy' },
+          { name: 'Terms of Use', to: '/terms' },
+          { name: 'About', to: '/about' },
+        ]}
+        note="Conversations are secure and logged only by the AI engine. Misuse triggers automatic DAO review."
+      />
     </div>
   );
 };

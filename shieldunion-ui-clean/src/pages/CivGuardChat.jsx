@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
+import LanguageSelector from "../components/LanguageSelector";
+import SmartChat from "../components/SmartChat";
 
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
@@ -9,7 +11,6 @@ const CivGuardChat = ({ caseId = "default-case-001" }) => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Load chat history on mount
   useEffect(() => {
     const loadChat = async () => {
       try {
@@ -37,7 +38,6 @@ const CivGuardChat = ({ caseId = "default-case-001" }) => {
         message: input,
       });
 
-      // Simulate AI response
       const aiRes = await axios.post(`${API}/api/chat/ai`, { message: input });
       const aiMessage = {
         sender: "AI",
@@ -54,8 +54,13 @@ const CivGuardChat = ({ caseId = "default-case-001" }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+    <div className="min-h-screen flex flex-col justify-between relative bg-gray-50">
+      <SmartChat />
       <main className="max-w-3xl mx-auto p-6 mt-10 bg-white rounded shadow h-[80vh] flex flex-col">
+        <div className="flex justify-end mb-2">
+          <LanguageSelector />
+        </div>
+
         <h2 className="text-2xl font-bold mb-4 text-center">🧠 Smart Chat (CivGuard)</h2>
 
         <div className="flex-1 overflow-y-auto border p-4 mb-4 rounded bg-gray-50">
