@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import SmartChat from "../components/SmartChat";
-import LanguageSelector from "../components/LanguageSelector";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "../components/LanguageSelector";
+import SmartChat from "../components/SmartChat";
 
 const PROMO_THRESHOLD = 1500;
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
@@ -19,92 +19,82 @@ const Home = () => {
         const res = await axios.get(`${API}/api/member/total`);
         setTotalMembers(res.data.total || 0);
       } catch (err) {
-        console.error("Failed to fetch member count:", err);
+        console.error("Error fetching total members:", err);
       }
     };
 
     fetchTotalMembers();
   }, []);
 
-  const promoMessage = t("promoMessage") || "🚀 First 1500 members join FREE!";
-  const promoThresholdMessage =
-    totalMembers < PROMO_THRESHOLD
-      ? `${PROMO_THRESHOLD - totalMembers} free spots left!`
-      : "Promo ended. Normal fees apply.";
-
   return (
-    <div className="relative">
-      {/* Promo banner */}
-      <div className="bg-green-100 text-center py-2 text-sm">
-        <div>{promoMessage}</div>
-        <div>{promoThresholdMessage}</div>
+    <div className="relative min-h-screen flex flex-col justify-between">
+      {/* Promo */}
+      <div className="bg-green-100 text-center p-2 text-sm font-medium">
+        🥇 {t("promoMessage")} <br />
+        {totalMembers < PROMO_THRESHOLD && `✅ 1500 free spots left!`}
       </div>
 
-      {/* Main content */}
-      <div className="flex flex-col items-center justify-center p-6 text-center">
-        <h1 className="text-4xl font-bold mb-2">🛡️ welcomeTo ShieldUnion</h1>
-        <p className="text-gray-600 mb-4">{t("platformDescription") || "platformDescription"}</p>
+      {/* Main Content */}
+      <div className="flex flex-col items-center justify-center text-center p-4 mt-4">
+        <h1 className="text-3xl sm:text-4xl font-bold text-black mb-2">
+          🛡️ {t("welcomeToShieldUnion")}
+        </h1>
+        <p className="text-gray-600 mb-6">{t("platformDescription")}</p>
 
-        <div className="flex flex-col lg:flex-row items-center gap-6">
-          {/* YouTube Video */}
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8">
+          {/* Video */}
           <iframe
             width="360"
             height="215"
             src="https://www.youtube.com/embed/Xv-QWQHfXY8"
-            title="ShieldUnion Video"
-            frameBorder="0"
+            title="ShieldUnion Intro"
+            className="rounded shadow-lg"
             allowFullScreen
-            className="rounded-xl shadow-lg"
           ></iframe>
 
-          {/* What we offer */}
-          <div className="max-w-md text-left">
-            <h3 className="text-lg font-semibold mb-2">What ShieldUnion Offers:</h3>
-            <ul className="list-disc list-inside text-sm text-gray-700">
-              <li>CivGuard Protection</li>
-              <li>Anonymous Help Network</li>
-              <li>Classified Vault</li>
-              <li>DAO Legal Voting</li>
-              <li>Real people. Real justice. Global shield.</li>
+          {/* Offer List */}
+          <div className="text-left">
+            <h3 className="text-xl font-semibold mb-2">
+              {t("What ShieldUnion Offers:")}
+            </h3>
+            <ul className="list-disc pl-5 text-gray-700 space-y-1">
+              <li>{t("CivGuard Protection")}</li>
+              <li>{t("Anonymous Help Network")}</li>
+              <li>{t("Classified Vault")}</li>
+              <li>{t("DAO Legal Voting")}</li>
+              <li>{t("Real people. Real justice. Global shield.")}</li>
             </ul>
           </div>
         </div>
 
-        {/* Join buttons */}
-        <div className="mt-6 flex flex-col sm:flex-row gap-4">
-          <Link to="/register?type=member" className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800">
-            🧑‍💻 joinAsMember
+        {/* Buttons */}
+        <div className="mt-8 flex flex-col sm:flex-row gap-4">
+          <Link
+            to="/register?type=member"
+            className="bg-black text-white px-6 py-2 rounded shadow hover:bg-gray-800"
+          >
+            🛡️ {t("joinAsMember")}
           </Link>
-          <Link to="/civguard-apply" className="bg-white border border-black py-2 px-4 rounded hover:bg-gray-100">
-            🛡️ applyAsCivGuard
+          <Link
+            to="/civguard-apply"
+            className="bg-white border px-6 py-2 rounded shadow hover:bg-gray-100"
+          >
+            🧠 {t("applyAsCivGuard")}
           </Link>
         </div>
       </div>
 
       {/* Language selector bottom left */}
-      <div className="fixed bottom-4 left-4 z-50">
+      <div className="absolute bottom-2 left-2 z-40">
         <LanguageSelector />
       </div>
 
       {/* SmartChat bottom right */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          zIndex: 1000,
-          width: "320px",
-          maxHeight: "500px",
-          backgroundColor: "#fff",
-          border: "1px solid #ccc",
-          borderRadius: "12px",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
-          overflow: "hidden",
-        }}
-      >
+      <div className="fixed bottom-2 right-2 z-50">
         <SmartChat />
       </div>
 
+      {/* Footer */}
       <Footer />
     </div>
   );
