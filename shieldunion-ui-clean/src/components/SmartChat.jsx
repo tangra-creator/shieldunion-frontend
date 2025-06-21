@@ -3,9 +3,11 @@ import axios from "axios";
 
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
-const SmartChat = ({ caseId = "General", sender = "Anonymous" }) => {
+const SmartChat = () => {
+  const caseId = "case-general"; // ✅ FIXED default case ID
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+
 
   // Load messages on mount
   useEffect(() => {
