@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import axios from "axios";
-import { useTranslation } from "react-i18next";
-import LanguageSelector from "../components/LanguageSelector";
 import SmartChat from "../components/SmartChat";
+import LanguageSelector from "../components/LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 const PROMO_THRESHOLD = 1500;
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
@@ -19,71 +19,93 @@ const Home = () => {
         const res = await axios.get(`${API}/api/member/total`);
         setTotalMembers(res.data.total || 0);
       } catch (err) {
-        console.error("Failed to fetch members:", err);
+        console.error("Failed to fetch member count:", err);
       }
     };
+
     fetchTotalMembers();
   }, []);
 
+  const promoMessage = t("promoMessage") || "🚀 First 1500 members join FREE!";
+  const promoThresholdMessage =
+    totalMembers < PROMO_THRESHOLD
+      ? `${PROMO_THRESHOLD - totalMembers} free spots left!`
+      : "Promo ended. Normal fees apply.";
+
   return (
     <div className="relative">
-      <div className="text-center mt-6">
-        {totalMembers < PROMO_THRESHOLD && (
-          <div className="bg-green-100 text-green-800 p-3 rounded mb-4">
-            <p>🎉 {t("promoMessage")}<br />{t("promoThresholdMessage")}</p>
+      {/* Promo banner */}
+      <div className="bg-green-100 text-center py-2 text-sm">
+        <div>{promoMessage}</div>
+        <div>{promoThresholdMessage}</div>
+      </div>
+
+      {/* Main content */}
+      <div className="flex flex-col items-center justify-center p-6 text-center">
+        <h1 className="text-4xl font-bold mb-2">🛡️ welcomeTo ShieldUnion</h1>
+        <p className="text-gray-600 mb-4">{t("platformDescription") || "platformDescription"}</p>
+
+        <div className="flex flex-col lg:flex-row items-center gap-6">
+          {/* YouTube Video */}
+          <iframe
+            width="360"
+            height="215"
+            src="https://www.youtube.com/embed/Xv-QWQHfXY8"
+            title="ShieldUnion Video"
+            frameBorder="0"
+            allowFullScreen
+            className="rounded-xl shadow-lg"
+          ></iframe>
+
+          {/* What we offer */}
+          <div className="max-w-md text-left">
+            <h3 className="text-lg font-semibold mb-2">What ShieldUnion Offers:</h3>
+            <ul className="list-disc list-inside text-sm text-gray-700">
+              <li>CivGuard Protection</li>
+              <li>Anonymous Help Network</li>
+              <li>Classified Vault</li>
+              <li>DAO Legal Voting</li>
+              <li>Real people. Real justice. Global shield.</li>
+            </ul>
           </div>
-        )}
-      </div>
+        </div>
 
-      <div className="text-center px-4">
-        <h1 className="text-4xl font-bold flex items-center justify-center gap-2">
-          <img src="/shield.png" alt="logo" className="w-8 h-8" />
-          {t("welcomeTo ShieldUnion")}
-        </h1>
-        <p className="text-gray-600 mt-2">{t("platformDescription")}</p>
-      </div>
-
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 p-6">
-        <iframe
-          width="360"
-          height="215"
-          src="https://www.youtube.com/embed/Xv-QWQHfXY8"
-          title="ShieldUnion Video"
-          allowFullScreen
-          className="rounded shadow-lg"
-        ></iframe>
-
-        <div className="max-w-md text-left text-gray-800">
-          <h3 className="text-lg font-semibold mb-2">What ShieldUnion Offers:</h3>
-          <ul className="list-disc list-inside text-sm">
-            <li>CivGuard Protection</li>
-            <li>Anonymous Help Network</li>
-            <li>Classified Vault</li>
-            <li>DAO Legal Voting</li>
-          </ul>
-          <p className="mt-4 text-sm">Real people. Real justice. Global shield.</p>
+        {/* Join buttons */}
+        <div className="mt-6 flex flex-col sm:flex-row gap-4">
+          <Link to="/register?type=member" className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800">
+            🧑‍💻 joinAsMember
+          </Link>
+          <Link to="/civguard-apply" className="bg-white border border-black py-2 px-4 rounded hover:bg-gray-100">
+            🛡️ applyAsCivGuard
+          </Link>
         </div>
       </div>
 
-      <div className="flex justify-center gap-4 mt-6">
-        <Link to="/register?type=member" className="bg-black text-white px-5 py-2 rounded shadow hover:bg-gray-800">
-          🛡️ {t("joinAsMember")}
-        </Link>
-        <Link to="/civguard-apply" className="bg-white border border-black px-5 py-2 rounded shadow hover:bg-gray-200">
-          🚔 {t("applyAsCivGuard")}
-        </Link>
+      {/* Language selector bottom left */}
+      <div className="fixed bottom-4 left-4 z-50">
+        <LanguageSelector />
       </div>
 
-      <LanguageSelector className="mt-8 text-center" />
+      {/* SmartChat bottom right */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          zIndex: 1000,
+          width: "320px",
+          maxHeight: "500px",
+          backgroundColor: "#fff",
+          border: "1px solid #ccc",
+          borderRadius: "12px",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+          overflow: "hidden",
+        }}
+      >
+        <SmartChat />
+      </div>
 
       <Footer />
-
-      {/* Floating Smart Chat */}
-      <div className="fixed bottom-4 right-4 z-50 shadow-xl">
-        <div className="bg-white rounded-xl overflow-hidden border border-gray-300">
-          <SmartChat />
-        </div>
-      </div>
     </div>
   );
 };
