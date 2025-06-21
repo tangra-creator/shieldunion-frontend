@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import SmartChat from "../components/SmartChat";
 import LanguageSelector from "../components/LanguageSelector";
 import { useTranslation } from "react-i18next";
+import SmartChat from "../components/SmartChat";
 import axios from "axios";
 
 const PROMO_THRESHOLD = 1500;
@@ -12,80 +12,92 @@ const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 const Home = () => {
   const { t } = useTranslation();
   const [totalMembers, setTotalMembers] = useState(0);
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
-    const fetchTotalMembers = async () => {
+    const fetchTotal = async () => {
       try {
         const res = await axios.get(`${API}/api/member/total`);
         setTotalMembers(res.data.total || 0);
       } catch (err) {
-        console.error("Error fetching total members:", err.message);
+        console.error("Error fetching total members:", err);
       }
     };
-    fetchTotalMembers();
+    fetchTotal();
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-between bg-white">
-      {/* Language Button */}
-      <div className="absolute top-2 right-4 z-50">
+    <div className="min-h-screen flex flex-col">
+      <div className="p-4 flex justify-end">
         <LanguageSelector />
       </div>
 
-      {/* Hero Section */}
-      <section className="text-center px-4 pt-20">
-        <h1 className="text-4xl sm:text-5xl font-bold text-black">🛡️ ShieldUnion</h1>
-        <p className="mt-4 text-gray-600 text-lg">{t("subtitle")}</p>
-        <p className="mt-2 text-gray-700 max-w-3xl mx-auto">
-          {t("homeDesc", {
-            defaultValue:
-              "Join the world's first unstoppable global protection network.",
-          })}
+      <main className="flex flex-col items-center px-4">
+        <h1 className="text-4xl font-bold mt-2 mb-1">🛡️ ShieldUnion</h1>
+        <p className="text-lg text-gray-600">{t("subtitle")}</p>
+        <p className="text-sm text-gray-500 mb-6">
+          {t("Join the world’s first unstoppable global protection network.")}
         </p>
 
-        {/* Embedded YouTube Video */}
-        <div className="mt-8 px-4">
-          <div className="w-full max-w-3xl mx-auto aspect-video">
-            <iframe
-              className="w-full h-full rounded shadow"
-              src="https://www.youtube.com/embed/Xv-QWQHfXY8"
-              title="ShieldUnion Explainer Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+        <div className="w-full max-w-4xl flex flex-col md:flex-row gap-4 mb-8">
+          <div className="w-full md:w-1/2">
+            <div className="aspect-video">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/Xv-QWQHfXY8"
+                title="ShieldUnion Explainer"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+          <div className="w-full md:w-1/2 p-4 text-left border rounded shadow">
+            <h2 className="text-xl font-semibold mb-2">What ShieldUnion Offers:</h2>
+            <ul className="list-disc list-inside text-gray-700 text-sm">
+              <li>CivGuard Protection</li>
+              <li>Anonymous Help Network</li>
+              <li>Classified Vault</li>
+              <li>DAO Legal Voting</li>
+            </ul>
+            <p className="mt-4 text-sm text-gray-600">Real people. Real justice. Global shield.</p>
           </div>
         </div>
 
-        {/* Only Join Buttons */}
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
+        <div className="flex gap-4 mb-3">
           <Link
             to="/register?type=member"
-            className="px-6 py-3 bg-black text-white rounded hover:bg-gray-800 transition"
+            className="bg-black text-white px-5 py-2 rounded hover:bg-gray-800"
           >
-            {t("getStarted", { defaultValue: "Join as Member" })}
+            Join as Member
           </Link>
           <Link
             to="/register?type=civguard"
-            className="px-6 py-3 bg-gray-200 text-black rounded hover:bg-gray-300 transition"
+            className="bg-gray-200 px-5 py-2 rounded hover:bg-gray-300"
           >
-            {t("getStartedGuard", { defaultValue: "Join as CivGuard" })}
+            Join as CivGuard
           </Link>
         </div>
 
-        {/* Promo Spots Counter */}
-        <p className="mt-3 text-sm text-gray-600">
-          {totalMembers < PROMO_THRESHOLD &&
-            `🎉 ${PROMO_THRESHOLD - totalMembers} Early Access Spots Remaining`}
+        <p className="text-sm text-gray-500 mb-6">
+          🏷️ {PROMO_THRESHOLD - totalMembers} Early Access Spots Remaining
         </p>
-      </section>
 
-      {/* Smart Chat fixed in corner */}
-      <div className="fixed bottom-4 right-4 z-40 w-[90%] sm:w-[350px] max-w-sm">
-        <SmartChat />
-      </div>
+        <button
+          onClick={() => setShowChat(!showChat)}
+          className="bg-blue-600 text-white px-4 py-2 rounded mb-8 hover:bg-blue-700"
+        >
+          💬 Open ShieldUnion AI Chat
+        </button>
 
-      {/* Footer */}
+        {showChat && (
+          <div className="w-full max-w-md">
+            <SmartChat />
+          </div>
+        )}
+      </main>
+
       <Footer />
     </div>
   );
