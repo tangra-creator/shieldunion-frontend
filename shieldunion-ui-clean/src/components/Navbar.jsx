@@ -5,8 +5,9 @@ import LanguageSelector from './LanguageSelector';
 const Navbar = () => {
   return (
     <nav className="bg-black text-white px-6 py-4 flex flex-col sm:flex-row items-center justify-between">
-      <div className="text-2xl font-bold mb-2 sm:mb-0">
+      <div className="text-2xl font-bold mb-2 sm:mb-0 flex items-center gap-4">
         <Link to="/">🛡️ ShieldUnion</Link>
+        <LanguageSelector />
       </div>
 
       <div className="flex flex-wrap gap-4 text-sm sm:text-base justify-center">
@@ -21,10 +22,6 @@ const Navbar = () => {
         <Link to="/about">About</Link>
         <Link to="/public-vault">Public Vault</Link>
         <Link to="/vault">Classified Vault</Link>
-      </div>
-
-      <div className="mt-4 sm:mt-0">
-        <LanguageSelector />
       </div>
     </nav>
   );
