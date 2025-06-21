@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import SmartChat from "../components/SmartChat";
-import LanguageSelector from "../components/LanguageSelector";
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "../components/LanguageSelector";
 import axios from "axios";
 
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 const PROMO_THRESHOLD = 1500;
 
 const Home = () => {
-  const { t } = useTranslation(["home", "translation"]);
+  const { t } = useTranslation();
   const [totalMembers, setTotalMembers] = useState(0);
-  const [isMember, setIsMember] = useState(false); // mock check or replace with real auth
 
   useEffect(() => {
     const fetchTotalMembers = async () => {
@@ -20,77 +19,58 @@ const Home = () => {
         const res = await axios.get(`${API}/api/member/total`);
         setTotalMembers(res.data.total || 0);
       } catch (err) {
-        console.error("Failed to fetch member total", err);
+        console.error("Failed to fetch total members:", err);
       }
     };
     fetchTotalMembers();
-
-    // Fake check – replace with real auth
-    const memberStatus = localStorage.getItem("isMember");
-    setIsMember(memberStatus === "true");
   }, []);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-between">
-      {/* Background Video or Image */}
-      <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute w-full h-full object-cover"
-          src="https://cdn.coverr.co/videos/coverr-earth-at-night-4049/1080p.mp4"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white px-4 text-center">
-          <img src="/logo.png" alt="ShieldUnion" className="w-16 mb-2" />
-          <h1 className="text-3xl md:text-5xl font-bold mb-2">ShieldUnion</h1>
-          <p className="text-xl font-medium mb-1">{t("home.subtitle")}</p>
-          <p className="text-sm md:text-base max-w-xl">{t("home.joinDesc")}</p>
-        </div>
-      </div>
-
-      {/* Language Selector */}
-      <div className="mt-4 flex justify-center">
+    <div className="relative min-h-screen bg-white">
+      <div className="absolute top-2 right-4 z-50">
         <LanguageSelector />
       </div>
 
-      {/* Buttons Section */}
-      <div className="text-center mt-6">
-        <h2 className="text-2xl font-bold">{t("home.joinTitle")}</h2>
-        <div className="flex flex-wrap justify-center gap-4 mt-4 px-4">
-          <Link to="/register?type=member" className="bg-black text-white px-5 py-2 rounded hover:bg-gray-800 transition">
-            {t("home.getStarted")}
-          </Link>
-          <Link to="/register?type=civguard" className="bg-gray-200 text-black px-5 py-2 rounded hover:bg-gray-300 transition">
-            {t("home.getStartedGuard")}
-          </Link>
+      <div className="text-center px-4 pt-20 pb-10">
+        <h1 className="text-4xl font-extrabold sm:text-5xl mb-3">🛡️ ShieldUnion</h1>
+        <p className="text-lg text-gray-700 mb-4">{t("subtitle")}</p>
 
-          {isMember && (
-            <>
-              <Link to="/submit-case" className="bg-white border border-black px-4 py-2 rounded hover:bg-gray-100 transition">
-                {t("home.submitCase")}
-              </Link>
-              <Link to="/dao-voting" className="bg-white border border-black px-4 py-2 rounded hover:bg-gray-100 transition">
-                {t("home.vote")}
-              </Link>
-            </>
-          )}
+        <div className="max-w-4xl mx-auto">
+          <iframe
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/Xv-QWQHfXY8"
+            title="ShieldUnion Intro"
+            frameBorder="0"
+            allowFullScreen
+            className="rounded-xl shadow-md"
+          ></iframe>
+        </div>
+
+        <h2 className="mt-10 text-2xl font-bold">{t("joinTitle")}</h2>
+        <p className="text-gray-600 mb-4">{t("joinDesc")}</p>
+
+        <div className="flex flex-col sm:flex-row justify-center gap-4 mb-4">
+          <Link to="/register?type=member" className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800">
+            {t("getStarted")}
+          </Link>
+          <Link to="/register?type=civguard" className="bg-gray-200 text-black px-6 py-2 rounded hover:bg-gray-300">
+            {t("getStartedGuard")}
+          </Link>
         </div>
 
         {totalMembers < PROMO_THRESHOLD && (
-          <p className="mt-4 text-sm text-blue-700">
-            🎉 {PROMO_THRESHOLD - totalMembers} Early Access Spots Remaining
+          <p className="text-sm text-gray-500">
+            🆓 {PROMO_THRESHOLD - totalMembers} Early Access Spots Remaining
           </p>
         )}
       </div>
 
-      {/* Smart Chat (right floating on desktop) */}
-      <div className="fixed bottom-4 right-4 z-50 w-full max-w-xs md:max-w-sm">
+      {/* Floating Smart Chat fixed at bottom right */}
+      <div className="fixed bottom-4 right-4 z-50 w-[300px] max-w-full sm:max-w-[300px] border rounded shadow-lg bg-white">
         <SmartChat />
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
