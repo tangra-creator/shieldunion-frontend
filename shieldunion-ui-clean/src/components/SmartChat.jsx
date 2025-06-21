@@ -26,7 +26,7 @@ const SmartChat = ({ caseId = "General", sender = "Anonymous" }) => {
     const newMsg = { sender, message: input };
 
     try {
-      await axios.post(`${API}/api/chat/${caseId}`, newMsg);
+      await axios.post(`${API}/api/chat/send`, payload);
       setMessages((prev) => [...prev, { ...newMsg, time: Date.now() }]);
       setInput("");
     } catch (err) {
