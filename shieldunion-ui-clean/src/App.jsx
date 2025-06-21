@@ -5,15 +5,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import RegisterMember from "./pages/RegisterMember";
-import RegisterCivGuard from "./pages/RegisterCivGuard";
+import Register from "./pages/Register"; // ✅ Unified registration handler
+import RegisterMember from "./pages/RegisterMember"; // optional legacy
+import RegisterCivGuard from "./pages/RegisterCivGuard"; // optional legacy
 import DAOVoting from "./components/DAOVoting";
 import ViewProposals from "./pages/ViewProposals";
 import PublicVault from "./pages/PublicVault";
 import ClassifiedVault from "./pages/ClassifiedVault";
 import SubmitProposal from "./pages/SubmitProposal";
 import DAO from "./pages/DAO";
-import Join from './pages/Join';
+import Join from "./pages/Join";
 
 // Layouts (Members)
 import MemberLayout from "./components/MemberLayout";
@@ -34,7 +35,7 @@ import CivGuardChat from "./pages/CivGuardChat";
 import AdminLayout from "./components/AdminLayout";
 import AdminPanel from "./pages/AdminPanel";
 
-// Optional: Testing chat
+// Optional: SmartChat Preview
 import SmartChat from "./components/SmartChat";
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/register" element={<Register />} /> {/* Unified route */}
         <Route path="/register/member" element={<RegisterMember />} />
         <Route path="/register/civguard" element={<RegisterCivGuard />} />
         <Route path="/vote" element={<DAOVoting />} />
@@ -57,7 +59,6 @@ function App() {
 
         {/* 🔐 Member Area */}
         <Route path="/member" element={<MemberLayout />}>
-          {/* Removed MemberPortal */}
           <Route path="profile" element={<MemberProfile />} />
           <Route path="my-cases" element={<MyCases />} />
           <Route path="my-protection" element={<MyProtection />} />
