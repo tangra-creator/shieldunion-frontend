@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const PROMO_THRESHOLD = 1500;
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const Home = () => {
+  const { t } = useTranslation();
   const [totalMembers, setTotalMembers] = useState(0);
 
   useEffect(() => {
@@ -27,17 +29,17 @@ const Home = () => {
         <div className="w-full max-w-4xl text-center">
           {totalMembers < PROMO_THRESHOLD && (
             <div className="mb-6 p-3 bg-green-100 border border-green-400 rounded text-green-700 text-center font-semibold">
-              🎉 First 1500 Members Join Free! Become part of ShieldUnion now before fees apply. <br />
-              After {PROMO_THRESHOLD} total members, all members will be charged normal fees.
+              🎉 {t("promoMessage")}<br />
+              {t("promoThresholdMessage", { threshold: PROMO_THRESHOLD })}
             </div>
           )}
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            🛡️ Welcome to <span className="text-black">ShieldUnion</span>
+            🛡️ {t("welcomeTo")} <span className="text-black">ShieldUnion</span>
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-8 px-2 sm:px-8">
-            The unstoppable global protection system powered by AI, DAO, and family legacy.
+            {t("platformDescription")}
           </p>
 
           {/* YouTube Video Embed Responsive */}
@@ -60,13 +62,13 @@ const Home = () => {
               to="/register/member"
               className="bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition text-sm sm:text-base"
             >
-              🙋 Join as Member
+              🙋 {t("joinAsMember")}
             </Link>
             <Link
               to="/register/civguard"
               className="border border-black text-black px-6 py-3 rounded hover:bg-black hover:text-white transition text-sm sm:text-base"
             >
-              🛡️ Apply as CivGuard
+              🛡️ {t("applyAsCivGuard")}
             </Link>
           </div>
         </div>
