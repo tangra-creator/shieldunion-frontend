@@ -18,83 +18,59 @@ const Home = () => {
       try {
         const res = await axios.get(`${API}/api/member/total`);
         setTotalMembers(res.data.total || 0);
-      } catch (err) {
-        console.error("Error fetching total members:", err);
+      } catch (error) {
+        console.error("Failed to fetch total members", error);
       }
     };
-
     fetchTotalMembers();
   }, []);
 
   return (
     <div className="relative min-h-screen flex flex-col justify-between">
-      {/* Promo */}
-      <div className="bg-green-100 text-center p-2 text-sm font-medium">
-        🥇 {t("promoMessage")} <br />
-        {totalMembers < PROMO_THRESHOLD && `✅ 1500 free spots left!`}
+      {/* Header */}
+      <div className="bg-black text-white py-6 px-4 text-center">
+        <h1 className="text-4xl font-bold mb-2">🛡️ ShieldUnion</h1>
+        <p className="text-lg max-w-xl mx-auto">
+          {t("home.subtitle") || "Unstoppable Global Protection Powered by AI and Justice"}
+        </p>
+        <div className="mt-4">
+          <LanguageSelector />
+        </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col items-center justify-center text-center p-4 mt-4">
-        <h1 className="text-3xl sm:text-4xl font-bold text-black mb-2">
-          🛡️ {t("welcomeToShieldUnion")}
-        </h1>
-        <p className="text-gray-600 mb-6">{t("platformDescription")}</p>
+      <main className="flex-grow flex flex-col items-center justify-center p-6 text-center">
+        <div className="max-w-2xl">
+          <h2 className="text-3xl font-semibold mb-4">{t("home.joinTitle") || "Join the Revolution"}</h2>
+          <p className="text-gray-700 text-lg mb-6">
+            {t("home.joinDesc") || "Protect yourself, protect others, and stand for truth with ShieldUnion."}
+          </p>
 
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8">
-          {/* Video */}
-          <iframe
-            width="360"
-            height="215"
-            src="https://www.youtube.com/embed/Xv-QWQHfXY8"
-            title="ShieldUnion Intro"
-            className="rounded shadow-lg"
-            allowFullScreen
-          ></iframe>
-
-          {/* Offer List */}
-          <div className="text-left">
-            <h3 className="text-xl font-semibold mb-2">
-              {t("What ShieldUnion Offers:")}
-            </h3>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1">
-              <li>{t("CivGuard Protection")}</li>
-              <li>{t("Anonymous Help Network")}</li>
-              <li>{t("Classified Vault")}</li>
-              <li>{t("DAO Legal Voting")}</li>
-              <li>{t("Real people. Real justice. Global shield.")}</li>
-            </ul>
+          <div className="space-y-4 sm:space-x-4 sm:space-y-0 sm:flex sm:justify-center">
+            <Link to="/register" className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 block">
+              {t("home.getStarted") || "📝 Register Now"}
+            </Link>
+            <Link to="/submit-case" className="bg-gray-200 text-black px-6 py-3 rounded-lg hover:bg-gray-300 block">
+              {t("home.submitCase") || "📂 Submit a Case"}
+            </Link>
+            <Link to="/dao-voting" className="bg-gray-200 text-black px-6 py-3 rounded-lg hover:bg-gray-300 block">
+              {t("home.vote") || "🗳️ DAO Voting"}
+            </Link>
           </div>
+
+          <p className="text-sm text-gray-500 mt-6">
+            {totalMembers < PROMO_THRESHOLD
+              ? `🎉 ${PROMO_THRESHOLD - totalMembers} Early Access Spots Remaining`
+              : "🔥 Early Access Promo Ended"}
+          </p>
         </div>
+      </main>
 
-        {/* Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-4">
-          <Link
-            to="/register?type=member"
-            className="bg-black text-white px-6 py-2 rounded shadow hover:bg-gray-800"
-          >
-            🛡️ {t("joinAsMember")}
-          </Link>
-          <Link
-            to="/civguard-apply"
-            className="bg-white border px-6 py-2 rounded shadow hover:bg-gray-100"
-          >
-            🧠 {t("applyAsCivGuard")}
-          </Link>
-        </div>
-      </div>
-
-      {/* Language selector bottom left */}
-      <div className="absolute bottom-2 left-2 z-40">
-        <LanguageSelector />
-      </div>
-
-      {/* SmartChat bottom right */}
-      <div className="fixed bottom-2 right-2 z-50">
+      {/* SmartChat Floating Bottom Right */}
+      <div className="fixed bottom-4 right-4 z-50">
         <SmartChat />
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
