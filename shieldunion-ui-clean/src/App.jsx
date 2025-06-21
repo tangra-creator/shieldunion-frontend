@@ -5,9 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Register from "./pages/Register"; // ✅ Unified registration handler
-import RegisterMember from "./pages/RegisterMember"; // optional legacy
-import RegisterCivGuard from "./pages/RegisterCivGuard"; // optional legacy
+import RegisterMember from "./pages/RegisterMember";
+import RegisterCivGuard from "./pages/RegisterCivGuard";
 import DAOVoting from "./components/DAOVoting";
 import ViewProposals from "./pages/ViewProposals";
 import PublicVault from "./pages/PublicVault";
@@ -46,7 +45,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/register" element={<Register />} /> {/* Unified route */}
         <Route path="/register/member" element={<RegisterMember />} />
         <Route path="/register/civguard" element={<RegisterCivGuard />} />
         <Route path="/vote" element={<DAOVoting />} />
