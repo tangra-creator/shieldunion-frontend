@@ -1,75 +1,82 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-console.log("SmartChat using API:", API); // Debug log to verify API URL
 
 const SmartChat = ({ caseId = "case-general" }) => {
+  const { t } = useTranslation("home"); // Using "home" namespace
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
-  // Load messages on mount or caseId change
   useEffect(() => {
-    const fetchMessages = async () => {
+    async function loadMessages() {
       try {
         const res = await axios.get(`${API}/api/chat/${caseId}`);
         setMessages(res.data || []);
       } catch (err) {
-        console.error("⚠️ Failed to load messages:", err);
+        console.error(t("errorLoadingMessages"), err);
       }
-    };
-    fetchMessages();
-  }, [caseId]);
+    }
+    loadMessages();
+  }, [caseId, t]);
 
-  // Send message handler
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    const newMsg = {
-      sender: "user",           // You can replace "user" with dynamic username if needed
-      caseId: caseId,           // Use current caseId
+    const payload = {
+      caseId,
+      sender: "user",
       message: input,
     };
 
     try {
-      const response = await axios.post(`${API}/api/chat/send`, newMsg);
-      console.log("Response from backend:", response.data);
-      setMessages((prev) => [...prev, { ...newMsg, time: Date.now() }]);
+      const res = await axios.post(`${API}/api/chat/send`, payload);
+      setMessages((prev) => [
+        ...prev,
+        { sender: "user", message: input, time: Date.now() },
+        res.data.ai,
+      ]);
       setInput("");
     } catch (err) {
-      console.error("❌ Failed to send message:", err);
+      console.error(t("errorSendingMessage"), err);
+      alert(t("errorSendingMessage"));
     }
   };
 
   return (
-    <div className="w-full max-w-md p-4 bg-white rounded shadow">
-      <h2 className="text-xl font-bold mb-2">🧠 Smart Chat — Case {caseId}</h2>
-      <div className="border rounded p-2 mb-2 h-60 overflow-y-auto bg-gray-50">
+    <div style={{ maxWidth: 400, margin: "auto" }}>
+      <h3>{t("smartChatTitle", "Smart Chat")} — {caseId}</h3>
+      <div
+        style={{
+          height: 300,
+          overflowY: "auto",
+          border: "1px solid #ccc",
+          padding: 10,
+          marginBottom: 10,
+          backgroundColor: "#f9f9f9",
+        }}
+      >
         {messages.length === 0 ? (
-          <p className="text-gray-400">No messages yet.</p>
+          <p>{t("noMessagesYet", "No messages yet.")}</p>
         ) : (
           messages.map((msg, idx) => (
-            <div key={idx} className="mb-1">
-              <strong>{msg.sender}:</strong> {msg.message}
+            <div key={idx} style={{ marginBottom: 8 }}>
+              <b>{msg.sender}:</b> {msg.message}
             </div>
           ))
         )}
       </div>
       <input
         type="text"
-        className="border rounded p-2 w-full mb-2"
-        placeholder="Type your message here..."
+        placeholder={t("typeYourMessage", "Type your message")}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") handleSend();
-        }}
+        onKeyDown={(e) => e.key === "Enter" && handleSend()}
+        style={{ width: "100%", padding: 8 }}
       />
-      <button
-        className="bg-black text-white px-4 py-2 rounded"
-        onClick={handleSend}
-      >
-        Send
+      <button onClick={handleSend} style={{ marginTop: 8, padding: "8px 12px" }}>
+        {t("send", "Send")}
       </button>
     </div>
   );
