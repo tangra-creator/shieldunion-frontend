@@ -14,20 +14,20 @@ const Join = () => {
           <div className="flex justify-end mb-2">
             <LanguageSelector />
           </div>
-          <h2 className="text-3xl font-bold mb-6 text-center">🛡️ Join ShieldUnion</h2>
 
+          <h2 className="text-3xl font-bold mb-6 text-center">🛡️ Join ShieldUnion</h2>
           <p className="text-center text-gray-700 mb-8">
-            Select your role to begin registration. ShieldUnion protects justice through both protected Members and verified CivGuards.
+            Choose your role to begin registration. ShieldUnion protects justice by empowering both protected Members and verified CivGuards.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* 👤 MEMBER JOIN */}
-            <div className="border rounded p-5 shadow bg-gray-50 hover:shadow-md transition">
+            <div className="border rounded p-5 shadow bg-gray-50 hover:shadow-md transition duration-200">
               <h3 className="text-xl font-semibold mb-2">👤 Join as a Member</h3>
               <p className="text-sm text-gray-600 mb-4">
-                Need protection, access to DAO support, or want to vote on justice cases? Join as a protected Member.
+                Need protection, voting rights, or DAO access? Join as a ShieldUnion Member.
               </p>
-              <Link to="/register">
+              <Link to="/register?type=member">
                 <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800">
                   Register as Member
                 </button>
@@ -35,10 +35,10 @@ const Join = () => {
             </div>
 
             {/* 🛡️ CIVGUARD JOIN */}
-            <div className="border rounded p-5 shadow bg-gray-50 hover:shadow-md transition">
+            <div className="border rounded p-5 shadow bg-gray-50 hover:shadow-md transition duration-200">
               <h3 className="text-xl font-semibold mb-2">🛡️ Join as a CivGuard</h3>
               <p className="text-sm text-gray-600 mb-4">
-                Are you a lawyer, investigator, journalist, or protector? Apply to be a verified CivGuard and serve the mission.
+                Are you a lawyer, journalist, or protector? Apply to be a verified CivGuard and defend truth.
               </p>
               <Link to="/civguard/apply">
                 <button className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">

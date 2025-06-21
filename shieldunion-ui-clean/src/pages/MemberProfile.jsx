@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import MemberNavbar from '../components/MemberNavbar';
+import SmartChat from '../components/SmartChat';
+import LanguageSelector from '../components/LanguageSelector';
 import Footer from '../components/Footer';
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
@@ -41,40 +44,47 @@ const MemberProfile = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <MemberNavbar />
+      <SmartChat />
+
       <main className="flex-grow">
         <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
-          <h2 className="text-3xl font-bold mb-6 text-center">🙍 Member Profile</h2>
+          <div className="flex justify-end mb-2">
+            <LanguageSelector />
+          </div>
 
-          <form onSubmit={handleSave} className="space-y-4">
+          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">🙍 Member Profile</h2>
+
+          <form onSubmit={handleSave} className="space-y-5">
             <div>
-              <label className="block font-medium mb-1">Alias</label>
+              <label className="block font-semibold mb-1">Alias</label>
               <input
                 type="text"
                 name="alias"
                 value={profile.alias}
                 onChange={handleChange}
                 placeholder="Your Alias"
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border rounded"
               />
             </div>
 
             <div>
-              <label className="block font-medium mb-1">Wallet Address</label>
+              <label className="block font-semibold mb-1">Wallet Address</label>
               <input
                 type="text"
                 name="wallet"
                 value={profile.wallet}
                 onChange={handleChange}
                 placeholder="Wallet Address"
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border rounded"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-2 rounded text-white ${
+              className={`w-full py-3 rounded text-white font-semibold ${
                 loading ? 'bg-gray-500' : 'bg-black hover:bg-gray-800'
               }`}
             >
@@ -82,11 +92,20 @@ const MemberProfile = () => {
             </button>
           </form>
 
-          {message && <p className="mt-4 text-center text-blue-600">{message}</p>}
+          {message && (
+            <p className="mt-4 text-center font-medium text-blue-600">{message}</p>
+          )}
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        links={[
+          { name: "Privacy Policy", to: "/privacy" },
+          { name: "Terms of Use", to: "/terms" },
+          { name: "About", to: "/about" },
+        ]}
+        note="Your profile is protected by the ShieldUnion AI governance system."
+      />
     </div>
   );
 };

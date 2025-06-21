@@ -43,6 +43,7 @@ const MemberDashboard = () => {
           <div className="flex justify-end mb-2">
             <LanguageSelector />
           </div>
+
           <h2 className="text-3xl font-bold mb-2 text-center">🛡️ Member Dashboard</h2>
           <p className="text-center text-gray-700 mb-2">
             Welcome, <strong>{alias}</strong>
@@ -56,7 +57,7 @@ const MemberDashboard = () => {
               📂 View All My Cases
             </Link>
             <Link to="/my-protection" className="bg-green-600 text-white p-4 rounded text-center hover:bg-green-700">
-              🛡️ Request Protection
+              🛡️ My Protection & CivGuard Chat
             </Link>
             <Link to="/dao-voting" className="bg-yellow-500 text-white p-4 rounded text-center hover:bg-yellow-600">
               🗳️ Vote on DAO Proposals
@@ -66,9 +67,6 @@ const MemberDashboard = () => {
             </Link>
             <Link to="/info-trade" className="bg-black text-white p-4 rounded text-center hover:bg-gray-800">
               📤 Information Trade
-            </Link>
-            <Link to="/my-protection" className="bg-purple-700 text-white p-4 rounded text-center hover:bg-purple-800 transition">
-              🧠 Chat with CivGuard
             </Link>
           </div>
 

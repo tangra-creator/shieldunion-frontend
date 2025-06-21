@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import CivGuardNavbar from "../components/CivGuardNavbar";
 import Footer from "../components/Footer";
 import LanguageSelector from "../components/LanguageSelector";
 import SmartChat from "../components/SmartChat";
@@ -35,6 +36,7 @@ const CivGuardVerify = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <CivGuardNavbar />
       <SmartChat />
 
       <main className="max-w-6xl mx-auto mt-8 p-4">

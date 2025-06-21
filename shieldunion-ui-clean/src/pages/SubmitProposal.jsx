@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
 import SmartChat from "../components/SmartChat";
+import LanguageSelector from "../components/LanguageSelector";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const SubmitProposal = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +15,6 @@ const SubmitProposal = () => {
   });
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
-  const [language, setLanguage] = useState("English");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,26 +46,15 @@ const SubmitProposal = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-50">
-      {/* 🌍 Language Switcher */}
-      <div className="text-right px-6 pt-4 text-sm text-gray-600">
-        🌐 Language:
-        <select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
-          className="ml-2 px-2 py-1 border rounded"
-        >
-          <option>English</option>
-          <option>Español</option>
-          <option>Français</option>
-          <option>العربية</option>
-          <option>Türkçe</option>
-          <option>Български</option>
-        </select>
-      </div>
+      <SmartChat />
 
       <main className="flex-grow">
-        <div className="max-w-xl mx-auto mt-6 p-6 bg-white rounded shadow">
-          <h2 className="text-2xl font-bold mb-4 text-center">📝 Submit DAO Proposal</h2>
+        <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold">📝 Submit DAO Proposal</h2>
+            <LanguageSelector />
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
@@ -82,8 +71,8 @@ const SubmitProposal = () => {
               value={formData.description}
               onChange={handleChange}
               required
-              className="w-full border p-2 rounded"
               rows={4}
+              className="w-full border p-2 rounded"
             />
             <div>
               <label className="block font-semibold mb-1">⏳ Vote Duration (days)</label>
@@ -130,14 +119,20 @@ const SubmitProposal = () => {
             <p className="mt-4 text-center font-semibold text-blue-600">{message}</p>
           )}
 
-          {/* 🧠 Optional SmartChat */}
           <div className="mt-8">
             <SmartChat caseId="DAO-PROPOSAL" sender="dao" />
           </div>
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        links={[
+          { name: "Privacy Policy", to: "/privacy" },
+          { name: "Terms of Use", to: "/terms" },
+          { name: "About", to: "/about" }
+        ]}
+        note="ShieldUnion is fully AI-governed. No human, including the founder, can view or modify your data."
+      />
     </div>
   );
 };

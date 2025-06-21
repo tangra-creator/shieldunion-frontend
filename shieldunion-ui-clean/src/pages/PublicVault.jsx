@@ -1,74 +1,130 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
-import SmartChat from "../components/SmartChat"; // Optional
+import LanguageSelector from "../components/LanguageSelector";
+import SmartChat from "../components/SmartChat";
+
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const PublicVault = () => {
-  const [records, setRecords] = useState([]);
+  const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [language, setLanguage] = useState("English");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [urgencyFilter, setUrgencyFilter] = useState("");
+  const [sortNewest, setSortNewest] = useState(true);
 
   useEffect(() => {
-    const fetchPublicVault = async () => {
+    const fetchVault = async () => {
       try {
-        const res = await axios.get(`${API}/api/protection/public`);
-        setRecords(res.data || []);
+        const res = await axios.get(`${API}/api/vault/public`);
+        setEntries(res.data || []);
       } catch (err) {
-        console.error("Failed to load public vault:", err);
+        console.error("Failed to fetch public vault:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPublicVault();
+    fetchVault();
   }, []);
 
+  const filteredItems = entries
+    .filter((item) =>
+      (item.title + item.summary).toLowerCase().includes(searchQuery)
+    )
+    .filter((item) => (urgencyFilter ? item.urgency === urgencyFilter : true))
+    .sort((a, b) =>
+      sortNewest
+        ? new Date(b.createdAt) - new Date(a.createdAt)
+        : new Date(a.createdAt) - new Date(b.createdAt)
+    );
+
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
-      {/* 🌐 Language Selector */}
-      <div className="text-right pr-6 pt-4 text-sm text-gray-600">
-        🌐 Language: 
-        <select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
-          className="ml-2 px-2 py-1 border rounded"
-        >
-          <option>English</option>
-          <option>Español</option>
-          <option>Français</option>
-          <option>العربية</option>
-          <option>Türkçe</option>
-          <option>Български</option>
-        </select>
-      </div>
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <SmartChat />
 
       <main className="flex-grow">
-        <div className="max-w-5xl mx-auto p-6 mt-4 bg-white rounded shadow">
-          <h2 className="text-3xl font-bold mb-6 text-center">📰 Public Classified Vault</h2>
+        <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded shadow">
+          <div className="flex justify-end mb-2">
+            <LanguageSelector />
+          </div>
+
+          <h1 className="text-3xl font-bold mb-4 text-center">🗂️ Public Vault</h1>
+          <p className="text-center mb-8 text-gray-600">
+            Browse public case summaries and documents shared with transparency.
+          </p>
 
           {loading ? (
-            <p className="text-center text-gray-500">Loading...</p>
-          ) : records.length === 0 ? (
-            <p className="text-center text-gray-500">No public records available.</p>
+            <p className="text-center">Loading...</p>
           ) : (
-            <ul className="space-y-4">
-              {records.map((item, index) => (
-                <li key={index} className="border rounded bg-gray-50 p-4 shadow">
-                  <p className="font-semibold">🆔 {item.caseId || "No ID"}</p>
-                  <p className="text-gray-800 mt-1">📄 {item.summary || "No summary provided."}</p>
-                  <p className="text-sm text-gray-500 mt-1">📅 {new Date(item.approvedAt).toLocaleString()}</p>
-                </li>
-              ))}
-            </ul>
+            <>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                <input
+                  type="text"
+                  placeholder="🔎 Search public vault"
+                  className="px-3 py-2 border rounded w-full sm:w-1/2"
+                  onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
+                />
+                <select
+                  onChange={(e) => setUrgencyFilter(e.target.value)}
+                  className="px-3 py-2 border rounded w-full sm:w-1/4"
+                >
+                  <option value="">All Urgencies</option>
+                  <option value="critical">🔥 Critical</option>
+                  <option value="normal">🟡 Normal</option>
+                </select>
+                <button
+                  onClick={() => setSortNewest((prev) => !prev)}
+                  className="px-4 py-2 border rounded bg-gray-100 hover:bg-gray-200"
+                >
+                  {sortNewest ? "📅 Newest First" : "📅 Oldest First"}
+                </button>
+              </div>
+
+              <p className="text-center text-sm text-gray-600 mb-2">
+                {filteredItems.length} entries matched
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {filteredItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-50 border p-4 rounded shadow-sm"
+                  >
+                    <h3 className="text-xl font-semibold mb-2">
+                      {item.title || "Untitled"}
+                    </h3>
+                    <p className="text-sm text-gray-700 mb-2">
+                      {item.summary || "No summary provided."}
+                    </p>
+                    {item.urgency === "critical" && (
+                      <span className="text-red-600 text-xs bg-red-100 px-2 py-0.5 rounded">
+                        🔥 Urgent
+                      </span>
+                    )}
+                    <p className="text-xs text-gray-500 italic mt-1">
+                      Posted:{" "}
+                      {item.createdAt
+                        ? new Date(item.createdAt).toLocaleDateString()
+                        : "Unknown"}
+                    </p>
+                    {item.fileUrl && (
+                      <a
+                        href={item.fileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline text-sm block mt-1"
+                      >
+                        📎 View Document
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </main>
-
-      {/* Optional SmartChat (can be removed if not suitable for public) */}
-      {/* <div className="px-6 my-6">
-        <SmartChat caseId="PUBLIC-VAULT" sender="visitor" />
-      </div> */}
 
       <Footer />
     </div>

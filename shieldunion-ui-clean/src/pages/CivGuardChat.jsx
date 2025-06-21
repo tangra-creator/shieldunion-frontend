@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import CivGuardNavbar from "../components/CivGuardNavbar";
 import Footer from "../components/Footer";
 import LanguageSelector from "../components/LanguageSelector";
 import SmartChat from "../components/SmartChat";
@@ -47,7 +48,10 @@ const CivGuardChat = ({ caseId = "default-case-001" }) => {
       setMessages((prev) => [...prev, aiMessage]);
     } catch (err) {
       console.error("Send error:", err);
-      setMessages((prev) => [...prev, { sender: "AI", message: "⚠️ AI error." }]);
+      setMessages((prev) => [
+        ...prev,
+        { sender: "AI", message: "⚠️ AI error." },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -55,7 +59,9 @@ const CivGuardChat = ({ caseId = "default-case-001" }) => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between relative bg-gray-50">
+      <CivGuardNavbar />
       <SmartChat />
+
       <main className="max-w-3xl mx-auto p-6 mt-10 bg-white rounded shadow h-[80vh] flex flex-col">
         <div className="flex justify-end mb-2">
           <LanguageSelector />

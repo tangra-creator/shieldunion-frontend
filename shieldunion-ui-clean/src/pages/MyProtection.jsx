@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Footer from "../components/Footer";
+import MemberNavbar from "../components/MemberNavbar";
 import SmartChat from "../components/SmartChat";
-import LanguageSelector from "../components/LanguageSelector"; // optional but enhances UX
+import LanguageSelector from "../components/LanguageSelector";
+import Footer from "../components/Footer";
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -35,13 +36,14 @@ const MyProtection = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <MemberNavbar />
       <SmartChat />
 
       <main className="flex-grow">
-        <div className="max-w-xl mx-auto p-6 bg-white shadow rounded mt-8">
+        <div className="max-w-xl mx-auto p-6 bg-white shadow rounded mt-10">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold">🛡️ My Protection</h2>
+            <h2 className="text-2xl font-bold text-gray-800">🛡️ Request Protection</h2>
             <LanguageSelector />
           </div>
 
@@ -49,8 +51,8 @@ const MyProtection = () => {
             placeholder="Why do you need protection?"
             value={reason}
             onChange={(e) => setReason(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded mb-4"
-            rows={4}
+            className="w-full p-3 border border-gray-300 rounded mb-4"
+            rows={5}
           />
 
           <button
@@ -65,7 +67,7 @@ const MyProtection = () => {
 
           {status && (
             <div
-              className={`mt-4 ${
+              className={`mt-4 text-center font-medium ${
                 status === "success" ? "text-green-600" : "text-red-600"
               }`}
             >
@@ -73,6 +75,7 @@ const MyProtection = () => {
             </div>
           )}
 
+          {/* Inline chat for specific case */}
           <div className="mt-10">
             <SmartChat caseId="CASE-2091" sender="member" />
           </div>
@@ -83,7 +86,7 @@ const MyProtection = () => {
         links={[
           { name: "Privacy Policy", to: "/privacy" },
           { name: "Terms of Use", to: "/terms" },
-          { name: "About", to: "/about" }
+          { name: "About", to: "/about" },
         ]}
         note="ShieldUnion is fully AI-governed. No human, including the founder, can view or modify your data."
       />

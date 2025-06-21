@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Footer from '../components/Footer';
-import LanguageSelector from '../components/LanguageSelector';
+import MemberNavbar from '../components/MemberNavbar';
 import SmartChat from '../components/SmartChat';
+import LanguageSelector from '../components/LanguageSelector';
+import Footer from '../components/Footer';
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -11,6 +12,7 @@ const InfoTrade = () => {
   const [content, setContent] = useState('');
   const [price, setPrice] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,18 +24,21 @@ const InfoTrade = () => {
         price,
       });
 
-      setMessage('✅ Information submitted successfully.');
       setTitle('');
       setContent('');
       setPrice('');
+      setMessage('✅ Information submitted successfully.');
+      setStatus('success');
     } catch (err) {
       console.error(err);
       setMessage('❌ Failed to submit information.');
+      setStatus('error');
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-50 relative">
+      <MemberNavbar />
       <SmartChat />
 
       <main className="flex-grow">
@@ -41,7 +46,8 @@ const InfoTrade = () => {
           <div className="flex justify-end mb-2">
             <LanguageSelector />
           </div>
-          <h2 className="text-3xl font-bold mb-6 text-center">🧠 InfoTrade Exchange</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">🧠 InfoTrade Exchange</h2>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
@@ -51,6 +57,7 @@ const InfoTrade = () => {
               required
               className="w-full px-4 py-2 border rounded"
             />
+
             <textarea
               placeholder="Describe your intel or evidence"
               value={content}
@@ -59,6 +66,7 @@ const InfoTrade = () => {
               rows={5}
               className="w-full px-4 py-2 border rounded"
             />
+
             <input
               type="number"
               placeholder="Requested payout (e.g. 100)"
@@ -67,6 +75,7 @@ const InfoTrade = () => {
               required
               className="w-full px-4 py-2 border rounded"
             />
+
             <button
               type="submit"
               className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
@@ -74,11 +83,27 @@ const InfoTrade = () => {
               Submit Info for Review
             </button>
           </form>
-          {message && <p className="mt-4 text-center">{message}</p>}
+
+          {message && (
+            <p
+              className={`mt-4 text-center font-medium ${
+                status === 'success' ? 'text-green-600' : 'text-red-600'
+              }`}
+            >
+              {message}
+            </p>
+          )}
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        links={[
+          { name: 'Privacy Policy', to: '/privacy' },
+          { name: 'Terms of Use', to: '/terms' },
+          { name: 'About', to: '/about' }
+        ]}
+        note="All submissions are reviewed by the ShieldUnion AI. Identities remain anonymous unless verified by smart governance."
+      />
     </div>
   );
 };
