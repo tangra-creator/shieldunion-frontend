@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import LanguageSelector from "../components/LanguageSelector"; // Language button
-import SmartChat from "../components/SmartChat"; // AI Chat component
+import LanguageSelector from "../components/LanguageSelector";
+import SmartChat from "../components/SmartChat";
 
 const PROMO_THRESHOLD = 1500;
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
@@ -27,14 +27,18 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-100 relative">
+
+      {/* Floating SmartChat Widget */}
       <SmartChat />
 
       <main className="flex-grow flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-4xl text-center">
+          {/* Language Selector */}
           <div className="flex justify-end mb-4">
             <LanguageSelector />
           </div>
 
+          {/* Promo Banner */}
           {totalMembers < PROMO_THRESHOLD && (
             <div className="mb-6 p-3 bg-green-100 border border-green-400 rounded text-green-700 text-center font-semibold">
               🎉 {t("promoMessage")}<br />
@@ -42,15 +46,17 @@ const Home = () => {
             </div>
           )}
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          {/* Headline */}
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
             🛡️ {t("welcomeTo")} <span className="text-black">ShieldUnion</span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-8 px-2 sm:px-8">
+          {/* Description */}
+          <p className="text-lg text-gray-700 mb-8 px-2 sm:px-8">
             {t("platformDescription")}
           </p>
 
-          {/* YouTube Video Embed Responsive */}
+          {/* YouTube Embed */}
           <div className="mb-10 w-full">
             <div className="relative" style={{ paddingTop: "56.25%" }}>
               <iframe
@@ -64,17 +70,7 @@ const Home = () => {
             </div>
           </div>
 
-          {/* ✅ Join Now Button Below Video */}
-          <div className="mt-6 mb-10">
-            <Link
-              to="/join"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-700 transition"
-            >
-              🎥 Join Now & Learn More
-            </Link>
-          </div>
-
-          {/* Join Buttons - Responsive Stack */}
+          {/* Join Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
             <Link
               to="/register/member"
