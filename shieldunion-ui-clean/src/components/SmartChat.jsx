@@ -8,9 +8,6 @@ const SmartChat = ({ caseId = "case-general" }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
-  // For simplicity, use a fixed sender name or you can pass as prop
-  const sender = "user"; // TODO: replace with dynamic user ID or name
-
   // Load messages on mount or caseId change
   useEffect(() => {
     const fetchMessages = async () => {
@@ -28,21 +25,15 @@ const SmartChat = ({ caseId = "case-general" }) => {
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    // Create new message object to send
-    const newMsg = { sender, message: input };
+    const newMsg = {
+      sender: "user",           // You can replace "user" with dynamic username if needed
+      caseId: caseId,           // Use current caseId
+      message: input,
+    };
 
     try {
-      // Construct payload to send to backend API
-      const payload = {
-        caseId,
-        sender,
-        message: input,
-      };
-
-      const response = await axios.post(`${API}/api/chat/send`, payload);
+      const response = await axios.post(`${API}/api/chat/send`, newMsg);
       console.log("Response from backend:", response.data);
-
-      // Update local messages with new message including timestamp
       setMessages((prev) => [...prev, { ...newMsg, time: Date.now() }]);
       setInput("");
     } catch (err) {
