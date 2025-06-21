@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "../components/LanguageSelector"; // Language button
 
 const PROMO_THRESHOLD = 1500;
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
@@ -27,6 +28,10 @@ const Home = () => {
     <div className="min-h-screen flex flex-col justify-between bg-gray-100">
       <main className="flex-grow flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-4xl text-center">
+          <div className="flex justify-end mb-4">
+            <LanguageSelector />
+          </div>
+
           {totalMembers < PROMO_THRESHOLD && (
             <div className="mb-6 p-3 bg-green-100 border border-green-400 rounded text-green-700 text-center font-semibold">
               🎉 {t("promoMessage")}<br />
