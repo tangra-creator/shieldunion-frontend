@@ -64,6 +64,16 @@ const Home = () => {
             </div>
           </div>
 
+          {/* ✅ Join Now Button Below Video */}
+          <div className="mt-6 mb-10">
+            <Link
+              to="/join"
+              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-700 transition"
+            >
+              🎥 Join Now & Learn More
+            </Link>
+          </div>
+
           {/* Join Buttons - Responsive Stack */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
             <Link
